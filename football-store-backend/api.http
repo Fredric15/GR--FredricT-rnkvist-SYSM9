@@ -1,0 +1,32 @@
+### Hämta alla användare
+GET http://localhost:5000/api/users
+
+### Hämta en specifik användare
+GET http://localhost:5000/api/users/USER_ID
+
+### Skapa en ny användare
+POST http://localhost:5000/api/users/register
+Content-Type: application/json
+
+{
+  "name": "newuser",
+  "email": "newuser@example.com",
+  "password": "password123"
+}
+
+### Logga in en användare
+POST http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+  "email": "newuser@example.com",
+  "password": "password123"
+}
+
+### Hämta inloggad användares profil
+GET http://localhost:5000/api/users/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNmExNzU3OTJjOWExMDUxMTZmOTQ2MDM1IiwiZW1haWwiOiJuZXd1c2VyQGV4YW1wbGUuY29tIiwiaXNBZG1pbiI6ZmFsc2V9LCJpYXQiOjE3Nzk5MTQ3MTgsImV4cCI6MTc3OTkxODMxOH0.hRL_gub9jetx4vVGDVRrXhwJ3cQlHMXYSmjJZ3z1ApQ
+
+### Radera inloggad användare
+DELETE http://localhost:5000/api/users/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNmExNzU3OTJjOWExMDUxMTZmOTQ2MDM1IiwiZW1haWwiOiJuZXd1c2VyQGV4YW1wbGUuY29tIiwiaXNBZG1pbiI6ZmFsc2V9LCJpYXQiOjE3Nzk5MTQ3MTgsImV4cCI6MTc3OTkxODMxOH0.hRL_gub9jetx4vVGDVRrXhwJ3cQlHMXYSmjJZ3z1ApQ
