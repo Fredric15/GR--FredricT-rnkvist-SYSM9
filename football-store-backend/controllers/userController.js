@@ -88,7 +88,7 @@ const getAllUsers = asyncHandler(async (req, res) => {
 // @desc    Hämta användarprofil
 // @route   GET /api/users/profile
 // @access  Private
-const getUserByProfile = asyncHandler(async (req, res) => {
+const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user.id).select("-password"); // Skickar inte med lösenordet i svaret
 
   if (user) {
@@ -162,7 +162,7 @@ module.exports = {
   registerUser,
   loginUser,
   getAllUsers,
-  getUserByProfile,
+  getUserProfile,
   updateUserProfile,
   deleteUser,
 };
