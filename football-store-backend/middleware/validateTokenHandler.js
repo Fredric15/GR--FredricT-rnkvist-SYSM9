@@ -24,7 +24,12 @@ const validateToken = asyncHandler(async (req, res, next) => {
       req.user = decoded.user;
       next();
     });
+  } else {
+    return res
+      .status(401)
+      .json({ message: "Ingen token, auktorisering nekad" });
   }
+
 });
 
 module.exports = validateToken;

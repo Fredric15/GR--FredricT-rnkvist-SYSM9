@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 
 // @desc    Register new user
 // @route   POST /api/users/register
@@ -150,7 +150,7 @@ const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
 
   if (user) {
-    await user.remove();
+    await user.deleteOne();
     res.json({ message: "Användare borttagen" });
   } else {
     res.status(404);
