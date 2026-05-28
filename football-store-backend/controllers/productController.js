@@ -27,7 +27,7 @@ const getProductById = asyncHandler(async (req, res) => {
 // @route   POST /api/products
 // @access  Public
 const createProduct = asyncHandler(async (req, res) => {
-  const { name, team, league, description, price, image } = req.body;
+  const { name, team, league, description, price, imageUrl } = req.body;
 
   const product = new Product({
     name,
@@ -35,7 +35,7 @@ const createProduct = asyncHandler(async (req, res) => {
     league,
     description,
     price,
-    image,
+    imageUrl,
   });
 
   const createdProduct = await product.save();
@@ -46,7 +46,7 @@ const createProduct = asyncHandler(async (req, res) => {
 // @route   PUT /api/products/:id
 // @access  Public
 const updateProduct = asyncHandler(async (req, res) => {
-  const { name, team, league, description, price, image } = req.body;
+  const { name, team, league, description, price, imageUrl } = req.body;
 
   const product = await Product.findById(req.params.id);
 
@@ -56,7 +56,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.league = league || product.league;
     product.description = description || product.description;
     product.price = price || product.price;
-    product.image = image || product.image;
+    product.imageUrl = imageUrl || product.imageUrl;
 
     const updatedProduct = await product.save();
     res.json(updatedProduct);
