@@ -4,14 +4,17 @@ const orderSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
       ref: "User",
+    },
+    email: {
+      type: String,
+      required: true,
     },
     orderItems: [
       {
         name: { type: String, required: true },
         qty: { type: Number, required: true },
-        imgage: { type: String, required: true },
+        image: { type: String, required: true },
         price: { type: Number, required: true },
         product: {
           type: mongoose.Schema.Types.ObjectId,
@@ -34,22 +37,6 @@ const orderSchema = new mongoose.Schema(
     paymentMethod: {
       type: String,
       required: true,
-    },
-    isPaid: {
-      type: Boolean,
-      required: true,
-      default: true, //Detta gör att standardvärdet blir true direkt
-    },
-    paidAt: {
-      type: Date,
-    },
-    isDelivered: {
-      type: Boolean,
-      required: true,
-      default: true, //Detta gör att standardvärdet blir true direkt
-    },
-    deliveredAt: {
-      type: Date,
     },
   },
   {
