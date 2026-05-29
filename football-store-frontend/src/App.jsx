@@ -5,8 +5,9 @@ import {
   Link,
   Navigate,
 } from "react-router-dom";
-import Navbar from "./components/navbar.jsx";
+import Navbar from "./components/Navbar.jsx";
 import Home from "./pages/Home.jsx";
+import Footer from "./components/Footer.jsx";
 import "./App.css";
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
             <Route path="/" element={<Home />} />
           </Routes>
         </main>
+
+        <Footer />
       </Router>
     </>
   );

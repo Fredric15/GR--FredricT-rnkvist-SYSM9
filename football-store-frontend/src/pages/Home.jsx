@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { getProducts } from "../api";
 import { useEffect, useState } from "react";
 import { useCart } from "../contexts/CartContext.jsx";
+import UspRow from "../components/UspRow.jsx";
 
 export default function Home() {
   const [popularProducts, setPopularProducts] = useState([]);
@@ -34,25 +35,11 @@ export default function Home() {
           </Link>
         </div>
       </div>
+
       <div className="mainPage">
+        <UspRow />
+
         <h2 className="Section-title">POPULÄRA LIGOR OCH PRODUKTER</h2>
-
-        {/* Filtreringsraden / Kategorierna */}
-        <div className="filterRow">
-          <Link to="/league/allsvenskan" className="filter-link">
-            Allsvenskan
-          </Link>
-          <Link to="/league/serie-a" className="filter-link">
-            Serie A
-          </Link>
-          <Link to="/league/la-liga" className="filter-link">
-            La Liga
-          </Link>
-          <Link to="/league/premier-league" className="filter-link">
-            Premier League
-          </Link>
-        </div>
-
         {/* Produktnätet - Just nu med platshållare för att du ska kunna styla layouten */}
         <div className="ProductGrid">
           {isLoading ?? <p>Laddar produkter...</p>}
@@ -76,6 +63,22 @@ export default function Home() {
                 </div>
               </div>
             ))}
+        </div>
+
+        {/* Filtreringsraden / Kategorierna */}
+        <div className="filterRow">
+          <Link to="/league/allsvenskan" className="filter-link">
+            Allsvenskan
+          </Link>
+          <Link to="/league/serie-a" className="filter-link">
+            Serie A
+          </Link>
+          <Link to="/league/la-liga" className="filter-link">
+            La Liga
+          </Link>
+          <Link to="/league/premier-league" className="filter-link">
+            Premier League
+          </Link>
         </div>
       </div>
     </div>
