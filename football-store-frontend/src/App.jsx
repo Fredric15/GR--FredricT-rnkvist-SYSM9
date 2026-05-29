@@ -8,6 +8,7 @@ import {
 import Navbar from "./components/Navbar.jsx";
 import Home from "./pages/Home.jsx";
 import Footer from "./components/Footer.jsx";
+import ProductsPage from "./pages/ProductsPage.jsx";
 import "./App.css";
 
 function App() {
@@ -20,6 +21,12 @@ function App() {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/products" element={<ProductsPage />} />
+            <Route path="/products/:leagueName" element={<ProductsPage />} />
+            <Route
+              path="/products/:leagueName/:teamName"
+              element={<ProductsPage />}
+            />
           </Routes>
         </main>
 

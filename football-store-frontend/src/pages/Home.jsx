@@ -30,7 +30,7 @@ export default function Home() {
         <div className="hero-content">
           <h1>BÄR DIN PASSION</h1>
           <p>Hitta matchtröjan för ditt favoritlag idag</p>
-          <Link to="/league/allsvenskan" className="hero-btn">
+          <Link to="/products/allsvenskan" className="hero-btn">
             Shoppa nu
           </Link>
         </div>
@@ -67,16 +67,16 @@ export default function Home() {
 
         {/* Filtreringsraden / Kategorierna */}
         <div className="filterRow">
-          <Link to="/league/allsvenskan" className="filter-link">
+          <Link to="/products/allsvenskan" className="filter-link">
             Allsvenskan
           </Link>
-          <Link to="/league/serie-a" className="filter-link">
+          <Link to="/products/serie-a" className="filter-link">
             Serie A
           </Link>
-          <Link to="/league/la-liga" className="filter-link">
+          <Link to="/products/la-liga" className="filter-link">
             La Liga
           </Link>
-          <Link to="/league/premier-league" className="filter-link">
+          <Link to="/products/premier-league" className="filter-link">
             Premier League
           </Link>
         </div>
