@@ -32,47 +32,47 @@ export function CartProvider({ children }) {
       return [...prevItems, { ...product, quantity: 1 }];
     });
   }
-}
 
-// Funktion för att ta bort en produkt från korgen
-function removeFromCart(productId) {
-  setCartItems((prevItems) =>
-    prevItems.filter((item) => item._id !== productId),
+  // Funktion för att ta bort en produkt från korgen
+  function removeFromCart(productId) {
+    setCartItems((prevItems) =>
+      prevItems.filter((item) => item._id !== productId),
+    );
+  }
+
+  // Funktion för att rensa korgen, till exempel efter en lyckad order
+  function clearCart() {
+    setCartItems([]);
+  }
+
+  //Räkna totalpris med hjälp av reduce()
+  function cartTotal() {
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0,
+    );
+  }
+
+  //Räkna totala antal produkter i korgen med reduce()
+  function cartCount() {
+    return cartItems.reduce((count, item) => count + item.quantity, 0);
+  }
+
+  return (
+    <CartContext.Provider
+      value={{
+        cartItems,
+        addToCart,
+        removeFromCart,
+        clearCart,
+        cartTotal,
+        cartCount,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
   );
 }
-
-// Funktion för att rensa korgen, till exempel efter en lyckad order
-function clearCart() {
-  setCartItems([]);
-}
-
-//Räkna totalpris med hjälp av reduce()
-function cartTotal() {
-  return cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0,
-  );
-}
-
-//Räkna totala antal produkter i korgen med reduce()
-function cartCount() {
-  return cartItems.reduce((count, item) => count + item.quantity, 0);
-}
-
-return (
-  <CartContext.Provider
-    value={{
-      cartItems,
-      addToCart,
-      removeFromCart,
-      clearCart,
-      cartTotal,
-      cartCount,
-    }}
-  >
-    {children}
-  </CartContext.Provider>
-);
 
 export function useCart() {
   return useContext(CartContext);
