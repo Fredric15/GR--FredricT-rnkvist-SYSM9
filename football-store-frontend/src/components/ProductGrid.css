@@ -1,0 +1,37 @@
+/* =========================================
+   PRODUCT GRID (Det befintliga rutnätet)
+========================================= */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+/* =========================================
+   PRODUCT CAROUSEL (Den nya scrollbara raden)
+========================================= */
+.product-carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto; /* Gör så att man kan scrolla i sidled */
+  padding-bottom: 16px; /* Ger lite utrymme för hover-effekten (box-shadow) på korten */
+
+  /* Magnet-effekt när man scrollar */
+  scroll-snap-type: x mandatory;
+
+  /* Dölj den fula scrollbaren (frivilligt, men snyggare!) */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.product-carousel::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Opera */
+}
+
+/* Korten inuti karusellen */
+.product-carousel > .product-card {
+  /* Tvinga korten att ha en fast bredd i karusellen (krymp inte!) */
+  flex: 0 0 260px;
+  scroll-snap-align: start; /* Ser till att kortet "klickar" fast i vänsterkant */
+}

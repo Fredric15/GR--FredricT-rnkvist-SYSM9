@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { getProducts } from "../api";
 import { useCart } from "../contexts/CartContext.jsx";
 import { Link, useParams } from "react-router-dom";
-import { Heart, SlidersHorizontal } from "lucide-react";
+import ProductGrid from "../components/ProductGrid.jsx";
+import { SlidersHorizontal } from "lucide-react";
 
 export default function ProductsPage() {
   const [allProducts, setAllProducts] = useState([]);
@@ -128,55 +129,7 @@ export default function ProductsPage() {
       {isLoading ? (
         <p>Laddar produkter...</p>
       ) : (
-        <div className="product-grid">
-          {leagueProducts.length > 0 ? (
-            leagueProducts.map((product) => (
-              <div
-                key={product._id}
-                className="product-card"
-                style={{ position: "relative" }}
-              >
-                {/* Favorit-hjärta uppe i högra hörnet */}
-                <button
-                  className="favorite-btn"
-                  style={{
-                    position: "absolute",
-                    top: "10px",
-                    right: "10px",
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                >
-                  <Heart size={24} strokeWidth={1.5} />
-                </button>
-
-                <div className="product-image-placeholder">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    style={{ width: "100%", height: "auto" }}
-                  />
-                </div>
-
-                <div className="product-info">
-                  <h3>{product.name}</h3>
-                  <p className="product-league">{product.league}</p>
-                  <p className="product-price">{product.price} SEK</p>
-
-                  <button
-                    className="add-to-cart-btn"
-                    onClick={() => addToCart(product)}
-                  >
-                    LÄGG I VARUKORG
-                  </button>
-                </div>
-              </div>
-            ))
-          ) : (
-            <p>Inga produkter hittades i denna kategori.</p>
-          )}
-        </div>
+        <ProductGrid products={displayedProducts} />
       )}
     </div>
   );

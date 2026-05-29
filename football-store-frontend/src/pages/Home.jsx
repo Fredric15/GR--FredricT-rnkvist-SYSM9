@@ -2,7 +2,11 @@ import { Link } from "react-router-dom";
 import { getProducts } from "../api";
 import { useEffect, useState } from "react";
 import { useCart } from "../contexts/CartContext.jsx";
+import ProductCard from "../components/ProductCard.jsx";
+import ProductGrid from "../components/ProductGrid.jsx";
 import UspRow from "../components/UspRow.jsx";
+import heroImage from "../assets/images/rosenberg_hero.jpg";
+import mainImage from "../assets/images/marchisio_main.jpg";
 
 export default function Home() {
   const [popularProducts, setPopularProducts] = useState([]);
@@ -27,6 +31,7 @@ export default function Home() {
   return (
     <div className="home-container">
       <div className="heroPage">
+        <img src={heroImage} alt="Fotbollsspelare i aktion" className="hero-image" />
         <div className="hero-content">
           <h1>BÄR DIN PASSION</h1>
           <p>Hitta matchtröjan för ditt favoritlag idag</p>
@@ -37,33 +42,17 @@ export default function Home() {
       </div>
 
       <div className="mainPage">
+        
         <UspRow />
+
+        <div className="main-image-wrapper">
+          <img src={mainImage} alt="Fotbollsspelare i aktion" className="main-image" />
+        </div>
 
         <h2 className="Section-title">POPULÄRA LIGOR OCH PRODUKTER</h2>
         {/* Produktnätet - Just nu med platshållare för att du ska kunna styla layouten */}
-        <div className="ProductGrid">
-          {isLoading ?? <p>Laddar produkter...</p>}
+        <ProductGrid products={popularProducts} variant="carousel" />
 
-          {!isLoading &&
-            popularProducts.map((product) => (
-              <div key={product._id} className="ProductCard">
-                <div className="product-image">
-                  <img src={product.imageUrl} alt={product.name} />
-                </div>
-                <div className="product-info">
-                  <h3>{product.name}</h3>
-                  <p className="product-league">{product.league}</p>
-                  <p className="product-price">{product.price} SEK</p>
-                  <button
-                    className="add-to-cart-btn"
-                    onClick={() => addToCart(product)}
-                  >
-                    Lägg i varukorg
-                  </button>
-                </div>
-              </div>
-            ))}
-        </div>
 
         {/* Filtreringsraden / Kategorierna */}
         <div className="filterRow">
