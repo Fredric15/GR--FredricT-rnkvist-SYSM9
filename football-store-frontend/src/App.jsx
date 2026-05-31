@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar.jsx";
 import Home from "./pages/Home.jsx";
 import Footer from "./components/Footer.jsx";
 import ProductsPage from "./pages/ProductsPage.jsx";
+import CartPage from "./pages/CartPage.jsx";
 import "./App.css";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                 path="/products/:leagueName/:teamName"
                 element={<ProductsPage />}
               />
+              <Route path="/cart" element={<CartPage />} />
             </Routes>
           </main>
 

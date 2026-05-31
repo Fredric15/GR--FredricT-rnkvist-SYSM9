@@ -13,6 +13,7 @@
   /* Färger */
   --color-primary: #3b82f6; /* Den blåa färgen från dina knappar i Figma */
   --color-primary-hover: #2563eb; /* Lite mörkare blå för hover-effekter */
+  --gradient-primary: linear-gradient(90deg, #40A3D3 0%, #0E5A9E 43.03%, #22A7FF 86.28%);
   --color-text: #111111; /* Nästan helt svart för rubriker och text */
   --color-text-light: #666666; /* Grå text för undertexter */
   --color-bg-light: #f3f5f5; /* Ljusgrå bakgrund */

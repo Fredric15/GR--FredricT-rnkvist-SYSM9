@@ -28,7 +28,7 @@ export default function ProductCard({ product }) {
           <span className="product-price">{product.price} SEK</span>
 
           <button
-            className="add-to-cart-btn"
+            className="add-to-cart-btn add-to-cart-btn--color-primary"
             onClick={() => addToCart(product)}
           >
             LÄGG I VARUKORG

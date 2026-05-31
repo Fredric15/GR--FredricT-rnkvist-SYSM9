@@ -40,6 +40,19 @@ export function CartProvider({ children }) {
     );
   }
 
+  function updateQuantity(productId, newQuantity) {
+    if (newQuantity < 1) {
+      removeFromCart(productId); // Om kunden minskar till 0, ta bort produkten
+      return;
+    }
+
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item._id === productId ? { ...item, quantity: newQuantity } : item,
+      ),
+    );
+  }
+
   // Funktion för att rensa korgen, till exempel efter en lyckad order
   function clearCart() {
     setCartItems([]);
@@ -64,6 +77,7 @@ export function CartProvider({ children }) {
         cartItems,
         addToCart,
         removeFromCart,
+        updateQuantity,
         clearCart,
         cartTotal,
         cartCount,

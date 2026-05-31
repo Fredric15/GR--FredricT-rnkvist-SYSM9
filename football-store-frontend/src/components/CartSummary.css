@@ -1,0 +1,85 @@
+/* =========================================
+   BLOCK: cart-summary (MOBILE FIRST)
+========================================= */
+.cart-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: var(--color-bg-light);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius);
+
+  /* Dessa två rader gör att kvittot stannar kvar på datorn när man scrollar! */
+  position: sticky;
+  top: 100px;
+}
+
+.cart-summary__row {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-small);
+  font-weight: 600;
+}
+
+.cart-summary__row--total {
+  font-size: var(--font-size-large);
+  font-weight: 800;
+}
+
+.cart-summary__divider {
+  height: 1px;
+  background-color: #ddd;
+  margin: 8px 0;
+}
+
+.cart-summary__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: var(--spacing-sm);
+}
+
+/* --- KNAPPAR --- */
+.cart-summary__btn {
+  text-align: center;
+  padding: 14px;
+  border-radius: 30px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: block;
+}
+
+.cart-summary__btn--primary {
+  background: var(--gradient-primary);
+  color: var(--color-white);
+  border: none;
+}
+
+.cart-summary__btn--secondary {
+  background-color: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-text);
+}
+
+/* =========================================
+   DESKTOP (TABLET OCH UPPÅT)
+========================================= */
+@media (min-width: 768px) {
+  .cart-summary__btn:hover {
+    transform: scale(1.02);
+  }
+
+  .cart-summary__btn--primary:hover {
+    background-color: var(
+      --color-primary-hover,
+      #0056b3
+    ); /* Lägg in en fallback om variabeln saknas */
+  }
+
+  .cart-summary__btn--secondary:hover {
+    background-color: var(--color-text);
+    color: var(--color-white);
+  }
+}
