@@ -15,22 +15,23 @@ function App() {
   return (
     <>
       <Router>
-        <div className="app-container">
+        <div className="app">
           <Navbar />
-        </div>
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<ProductsPage />} />
-            <Route path="/products/:leagueName" element={<ProductsPage />} />
-            <Route
-              path="/products/:leagueName/:teamName"
-              element={<ProductsPage />}
-            />
-          </Routes>
-        </main>
 
-        <Footer />
+          <main className="app__main">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/products" element={<ProductsPage />} />
+              <Route path="/products/:leagueName" element={<ProductsPage />} />
+              <Route
+                path="/products/:leagueName/:teamName"
+                element={<ProductsPage />}
+              />
+            </Routes>
+          </main>
+
+          <Footer />
+        </div>
       </Router>
     </>
   );

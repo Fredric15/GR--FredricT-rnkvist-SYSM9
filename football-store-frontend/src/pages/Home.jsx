@@ -7,6 +7,7 @@ import ProductGrid from "../components/ProductGrid.jsx";
 import UspRow from "../components/UspRow.jsx";
 import heroImage from "../assets/images/rosenberg_hero.jpg";
 import mainImage from "../assets/images/marchisio_main.jpg";
+import "./Home.css";
 
 export default function Home() {
   const [popularProducts, setPopularProducts] = useState([]);
@@ -29,43 +30,56 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="home-container">
-      <div className="heroPage">
-        <img src={heroImage} alt="Fotbollsspelare i aktion" className="hero-image" />
-        <div className="hero-content">
-          <h1>BÄR DIN PASSION</h1>
-          <p>Hitta matchtröjan för ditt favoritlag idag</p>
-          <Link to="/products/allsvenskan" className="hero-btn">
+    <div className="home">
+      <section className="hero">
+        <img
+          src={heroImage}
+          alt="Fotbollsspelare i aktion"
+          className="hero__image"
+        />
+        <div className="hero__content">
+          <h1 className="hero__title">BÄR DIN PASSION</h1>
+          <p className="hero__text">
+            Hitta matchtröjan för ditt favoritlag idag
+          </p>
+          <Link to="/products/allsvenskan" className="hero__btn">
             Shoppa nu
           </Link>
         </div>
-      </div>
+      </section>
 
-      <div className="mainPage">
-        
-        <UspRow />
+      <div className="home__main">
+        <UspRow className="home__usp-row" />
 
-        <div className="main-image-wrapper">
-          <img src={mainImage} alt="Fotbollsspelare i aktion" className="main-image" />
+        <div className="home__banner">
+          <img
+            src={mainImage}
+            alt="Fotbollsspelare i aktion"
+            className="home__banner-image"
+          />
         </div>
 
-        <h2 className="Section-title">POPULÄRA LIGOR OCH PRODUKTER</h2>
-        {/* Produktnätet - Just nu med platshållare för att du ska kunna styla layouten */}
-        <ProductGrid products={popularProducts} variant="carousel" />
+        <h2 className="home__section-title">POPULÄRA PRODUKTER</h2>
 
+        {/* Produktnätet - Just nu med platshållare för att du ska kunna styla layouten */}
+        {isLoading ? (
+          <p>Laddar produkter...</p>
+        ) : (
+          <ProductGrid products={popularProducts} variant="carousel" />
+        )}
 
         {/* Filtreringsraden / Kategorierna */}
-        <div className="filterRow">
-          <Link to="/products/allsvenskan" className="filter-link">
+        <div className="home__filters">
+          <Link to="/products/allsvenskan" className="home__filter-link">
             Allsvenskan
           </Link>
-          <Link to="/products/serie-a" className="filter-link">
+          <Link to="/products/serie-a" className="home__filter-link">
             Serie A
           </Link>
-          <Link to="/products/la-liga" className="filter-link">
+          <Link to="/products/la-liga" className="home__filter-link">
             La Liga
           </Link>
-          <Link to="/products/premier-league" className="filter-link">
+          <Link to="/products/premier-league" className="home__filter-link">
             Premier League
           </Link>
         </div>

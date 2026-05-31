@@ -4,6 +4,7 @@ import { useCart } from "../contexts/CartContext.jsx";
 import { Link, useParams } from "react-router-dom";
 import ProductGrid from "../components/ProductGrid.jsx";
 import { SlidersHorizontal } from "lucide-react";
+import "./ProductsPage.css";
 
 export default function ProductsPage() {
   const [allProducts, setAllProducts] = useState([]);
@@ -51,25 +52,34 @@ export default function ProductsPage() {
       })
     : leagueProducts;
   return (
-    <div className="products-page-container">
+    <div className="products-page">
       {/* 1. KATEGORIRADEN (FilterRow) */}
-      <div className="category-nav">
+      <div className="products-page__categories">
         {!leagueName ? (
           // VISAS OM INGEN LIGA ÄR VALD (Standardmenyn)
           <>
-            <Link to="/products" className="Category-link">
-              Visa alla ligor
-            </Link>
-            <Link to="/products/allsvenskan" className="Category-link">
+            <Link
+              to="/products/allsvenskan"
+              className="products-page__category-link"
+            >
               Allsvenskan
             </Link>
-            <Link to="/products/serie-a" className="Category-link">
+            <Link
+              to="/products/serie-a"
+              className="products-page__category-link"
+            >
               Serie A
             </Link>
-            <Link to="/products/la-liga" className="Category-link">
+            <Link
+              to="/products/la-liga"
+              className="products-page__category-link"
+            >
               La Liga
             </Link>
-            <Link to="/products/premier-league" className="Category-link">
+            <Link
+              to="/products/premier-league"
+              className="products-page__category-link"
+            >
               Premier League
             </Link>
           </>
@@ -78,8 +88,7 @@ export default function ProductsPage() {
           <>
             <Link
               to="/products"
-              className="Category-link"
-              style={{ fontWeight: "bold" }}
+              className="products-page__category-link products-page__category-link--back"
             >
               ← Tillbaka till ligor
             </Link>
@@ -88,12 +97,13 @@ export default function ProductsPage() {
             {teamProducts.map((team) => {
               // Skapa en slug av lagnamnet för URL:en (t.ex. "Malmö FF" -> "malmo-ff")
               const teamSlug = team.toLowerCase().replace(/\s+/g, "-");
+              const isActive = teamSlug === teamName; // Kolla om det är det valda laget
 
               return (
                 <Link
                   key={team}
                   to={`/products/${leagueName}/${teamSlug}`}
-                  className="Category-link"
+                  className={`products-page__category-link ${isActive ? "products-page__category-link--active" : ""}`}
                 >
                   {team}
                 </Link>
@@ -104,22 +114,12 @@ export default function ProductsPage() {
       </div>
 
       {/* 2. META-RADEN (Antal produkter & Sorteringsknapp) */}
-      <div
-        className="products-meta-row"
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          margin: "20px 0",
-        }}
-      >
-        <div className="product-count">
+      <div className="products-page__meta">
+        <div className="products-page__count">
           Antal Produkter: <strong>{leagueProducts.length}</strong>
         </div>
 
-        <button
-          className="filter-sort-btn"
-          style={{ display: "flex", alignItems: "center", gap: "8px" }}
-        >
+        <button className="products-page__filter-btn">
           Filter och sortering
           <SlidersHorizontal size={18} />
         </button>

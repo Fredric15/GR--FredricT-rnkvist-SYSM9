@@ -1,0 +1,93 @@
+/* MOBILE FIRST */
+
+.products-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.products-page__categories {
+  display: flex;
+  gap: var(--spacing-xs);
+  overflow-x: auto;
+  padding-bottom: var(--spacing-sm);
+}
+
+.products-page__categories::-webkit-scrollbar {
+  display: none; /* För Chrome/Safari */
+}
+
+.products-page__category-link {
+  white-space: nowrap; /* Förhindra att länkarna bryts */
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  color: var(--color-text);
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  text-decoration: none;
+  background-color: var(--color-white);
+  transition: all 0.2s ease;
+}
+
+.products-page__category-link--active {
+  border-color: var(--color-text);
+  background-color: var(--color-text);
+  color: var(--color-white);
+}
+
+.products-page__category-link--back {
+  background-color: var(
+    --color-bg-light
+  ); /* En liten avvikande färg för tillbaka-knappen */
+}
+
+/* (Antal produkter & sortering) */
+
+.products-page__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2px solid #eee;
+}
+
+.products-page__count {
+  font-size: var(--font-size-small);
+  color: var(--color-text-light);
+}
+
+.products-page__count strong {
+  color: var(--color-text);
+}
+
+.products-page__filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--color-white);
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  padding: 8px 16px;
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .products-page {
+    padding: var(--spacing-lg) 0 var(--spacing-xl) 0; /* Mer padding på desktop */
+  }
+
+  .products-page__categories {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+
+  .products-page__category-link:hover,
+  .products-page__filter-btn:hover {
+    border-color: var(--color-primary);
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,60 @@
+/* CSS-RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================================
+   GLOBALA STILAR
+========================================= */
+
+:root {
+  /* Färger */
+  --color-primary: #3b82f6; /* Den blåa färgen från dina knappar i Figma */
+  --color-primary-hover: #2563eb; /* Lite mörkare blå för hover-effekter */
+  --color-text: #111111; /* Nästan helt svart för rubriker och text */
+  --color-text-light: #666666; /* Grå text för undertexter */
+  --color-bg-light: #f3f5f5; /* Ljusgrå bakgrund */
+  --color-white: #ffffff;
+  --color-favorite: #ff4b4b; /* Röd färg för favorithjärtat */
+
+  /* Avstånd & storlekar */
+
+  --spacing-xs: 0.5rem; /* 8px */
+  --spacing-sm: 1rem; /* 16px */
+  --spacing-md: 1.5rem; /* 24px */
+  --spacing-lg: 2rem; /* 32px */
+  --spacing-xl: 3rem; /* 48px */
+
+  /* Typsnitt */
+
+  --font-family: Helvetica, Arial, sans-serif;
+  --font-size-small: 0.85rem;
+  --font-size-base: 1rem;
+  --font-size-large: 1.1rem;
+  --font-size-xlarge: 2rem;
+
+  /* Form & Design */
+  --border-radius: 8px;
+
+  /* =========================================
+   3. GRUNDLÄGGANDE TYPOGRAFI & HTML-TAGGAR
+   Detta gäller för hela applikationen
+========================================= */
+  body {
+    font-family: var(--font-family);
+    background-color: var(
+      --color-bg-light
+    ); 
+    color: var(--color-text);
+    line-height: 1.5;
+    /* Förhindrar att texten blir onödigt stor på mobiler i liggande läge */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Sätt standard för knappar så vi slipper göra om det varje gång */
+  button {
+    font-family: inherit; /* Gör att knappar ärver Helvetica från body */
+  }
+}

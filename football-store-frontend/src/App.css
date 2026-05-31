@@ -1,15 +1,32 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app__main {
+  flex: 1;
+
+  padding: var(--spacing-sm);
+  
+
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%; /* Centrerar innehållet på skärmen */
+}
+
 /* =========================================
    PRODUCT CARD
 ========================================= */
 
 .product-card {
   position: relative;
-  background-color: #ffffff;
-  border-radius: 8px;
-  padding: 16px;
+  background-color: var(--color-white);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--spacing-md);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   transition:
     transform 0.2s ease,
@@ -32,7 +49,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: #111;
+  color: var(--color-text);
   z-index: 2;
   transition:
     color 0.2s ease,
@@ -40,7 +57,7 @@
 }
 
 .favorite-btn:hover {
-  color: #ff4b4b;
+  color: var(--color-favorite);
   transform: scale(1.1);
 }
 
@@ -55,8 +72,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f8f9fa;
-  border-radius: 6px;
+  background-color: var(--color-bg-light);
+  border-radius: var(--border-radius);
   overflow: hidden;
 }
 
@@ -78,7 +95,7 @@
 
 .product-title-link {
   text-decoration: none;
-  color: #111;
+  color: var(--color-text);
 }
 
 .product-info h3 {
@@ -90,7 +107,7 @@
 
 .product-subtitle {
   font-size: 0.8rem;
-  color: #666;
+  color: var(--color-text-light);
   margin: 0;
   text-transform: uppercase;
   font-weight: 600;
@@ -110,21 +127,21 @@
 .product-price {
   font-size: 1.1rem;
   font-weight: 800;
-  color: #111;
+  color: var(--color-text);
 }
 
 .add-to-cart-btn {
-  background-color: #3b82f6;
-  color: #ffffff;
+  background-color: var(--color-primary);
+  color: var(--color-white);
   border: none;
-  border-radius: 6px;
-  padding: 10px 16px;
-  font-size: 0.85rem;
+  border-radius: var(--border-radius);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-small);
   font-weight: 700;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
 .add-to-cart-btn:hover {
-  background-color: #2563eb;
+  background-color: var(--color-primary-hover);
 }

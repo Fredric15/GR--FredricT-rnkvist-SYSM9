@@ -1,0 +1,42 @@
+/* Usp-Row (Mobile first) */
+
+.usp-row {
+  display: flex;
+  flex-direction: column; /* Stapla dem på mobilen */
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) 0;
+  background-color: var(
+    --color-bg-light
+  );
+  border-radius: var(--border-radius);
+}
+
+.usp-row__item {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centrerar text och ikon på mobilen */
+  gap: 10px;
+  font-size: var(--font-size-small);
+  font-weight: 700;
+  color: var(--color-text);
+  text-transform: uppercase;
+}
+
+.usp-row__icon {
+  color: var(--color-primary);
+}
+
+
+/* --- DESKTOP --- */
+@media (min-width: 768px) {
+.usp-row {
+    flex-direction: row; /* Lägg dem sida vid sida! */
+    justify-content: space-between; /* Sprid ut dem jämnt */
+    background-color: transparent; /* Ta bort bakgrunden om du vill att den ska smälta in */
+    padding: var(--spacing-lg) 0;
+  }
+
+  .usp-row__item {
+    justify-content: flex-start; /* Nollställ centreringen för desktop */
+  }
+}

@@ -1,0 +1,139 @@
+/*HERO-section Mobile First */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 1;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  color: var(--color-white);
+  text-align: center;
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+.hero__title,
+.hero__text {
+  display: none;
+}
+
+.hero__btn {
+  background-color: var(--color-white);
+  color: var(--color-text);
+  padding: 12px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: var(--font-size-base);
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* Home-section Mobile First */
+
+.home__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+}
+
+
+
+.home__banner {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+}
+
+.home__banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.home__section-title {
+  text-align: center;
+  font-size: var(--font-size-xlarge);
+  font-weight: 800;
+}
+
+/* Länkarna längst ner */
+.home__filters {
+  display: flex;
+  flex-wrap: wrap; /* Låter länkarna hoppa ner på ny rad om de inte får plats */
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+.home__filter-link {
+  background-color: var(--color-white);
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+/* DESKTOP */
+@media (min-width: 768px) {
+  .hero {
+    height: 75vh;
+    max-height: 800px;
+  }
+
+  .hero__btn:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    transform: scale(1.05);
+  }
+
+  .hero__title {
+    display: block;
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .hero__text {
+    display: block;
+    font-size: var(--font-size-large);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .home__banner {
+    height: 450px;
+  }
+
+  .home__filter-link:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+}
