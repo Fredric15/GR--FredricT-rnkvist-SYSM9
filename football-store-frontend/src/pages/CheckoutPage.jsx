@@ -3,6 +3,7 @@ import ProgressBar from "../components/ProgressBar.jsx";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../contexts/CartContext.jsx";
 import CartSummary from "../components/CartSummary.jsx";
+import CheckoutItemsList from "../components/CheckoutItemsList.jsx";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import "./CheckoutPage.css";
 
@@ -119,6 +120,7 @@ export default function CheckoutPage() {
           <div
             className={`checkout-mobile-summary ${isSummaryOpen ? "checkout-mobile-summary--open" : ""}`}
           >
+            <CheckoutItemsList items={cartItems} />
             <CartSummary />
           </div>
 
@@ -248,6 +250,7 @@ export default function CheckoutPage() {
         </div>
 
         <div className="checkout-desktop-summary">
+          <CheckoutItemsList items={cartItems} />
           <CartSummary />
         </div>
       </div>

@@ -14,7 +14,7 @@
 .checkout-page__title {
   font-size: var(--font-size-xlarge);
   font-weight: 800;
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-sm);
 }
 
 .checkout-page__content {
@@ -147,7 +147,7 @@
 .checkout-payment__option.active {
   border-color: var(--color-primary);
   border-width: 2px;
-  background-color: #f0f8ff; /* Väldigt ljusblå bakgrund vid markerad */
+  background-color: #f0f8ff;
 }
 
 .checkout-submit-btn {
@@ -191,7 +191,7 @@
 
   .checkout-form-container {
     flex: 1;
-    
+
     padding-right: var(--spacing-xl);
   }
 
