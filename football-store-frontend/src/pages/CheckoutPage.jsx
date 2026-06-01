@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import ProgressBar from '../components/ProgressBar.jsx';
-import {useNavigate} from 'react-router-dom';
-import { useCart } from '../contexts/CartContext.jsx';
-import CartSummary from '../components/CartSummary.jsx';
-import {ChevronDown, ChevronUp} from 'lucide-react';
+import React, { useState } from "react";
+import ProgressBar from "../components/ProgressBar.jsx";
+import { useNavigate } from "react-router-dom";
+import { useCart } from "../contexts/CartContext.jsx";
+import CartSummary from "../components/CartSummary.jsx";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import "./CheckoutPage.css";
 
 export default function CheckoutPage() {
@@ -33,18 +33,58 @@ export default function CheckoutPage() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     console.log("Orderdata:", {
       ...formData,
       paymentMethod,
       cartItems,
-      total: cartTotal(),
+      totalPrice: getOrderSummary().totalPrice,
     });
 
-    clearCart();
-    navigate("/order-confirmation");
+    const formattedCartItems = cartItems.map((item) => ({
+      name: item.name,
+      qty: item.quantity || 1,
+      image: item.imageUrl,
+      price: item.price,
+      product: item._id,
+    }));
+
+    const orderPayload = {
+      email: formData.email,
+      shippingAddress: {
+        fullName: formData.fullName,
+        address: formData.address,
+        zipCode: formData.postalCode,
+        city: formData.city,
+        country: formData.country,
+        phone: formData.phone,
+      },
+      orderItems: formattedCartItems,
+      totalPrice: getOrderSummary().totalPrice,
+      paymentMethod,
+    };
+
+    try {
+      const response = await fetch("http://localhost:5000/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderPayload),
+      });
+
+      if (!response.ok) {
+        throw new Error("Något gick fel vid orderläggningen");
+      }
+
+      const savedOrder = await response.json();
+      console.log("Order sparad:", savedOrder);
+      clearCart();
+      navigate("/order-confirmation", { state: { orderData: savedOrder } });
+    } catch (error) {
+      console.error("Kunde inte skicka ordern:", error);
+      alert("Ett fel uppstod när din order skulle hanteras. Försök igen!");
+    }
   };
 
   return (
@@ -199,7 +239,10 @@ export default function CheckoutPage() {
               className="checkout-submit-btn"
               disabled={!paymentMethod}
             >
-              Betala {getOrderSummary().totalPrice > 0 ? `- ${getOrderSummary().totalPrice.toFixed(2)} kr` : ""}
+              Betala{" "}
+              {getOrderSummary().totalPrice > 0
+                ? `- ${getOrderSummary().totalPrice.toFixed(2)} kr`
+                : ""}
             </button>
           </form>
         </div>
