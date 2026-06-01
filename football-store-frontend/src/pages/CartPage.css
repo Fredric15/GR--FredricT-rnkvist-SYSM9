@@ -43,6 +43,14 @@
   gap: var(--spacing-sm);
 }
 
+.cart-page__btn--primary {
+  background: var(--gradient-primary);
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  padding: var(--spacing-xs) var(--spacing-xs);
+  color: var(--color-white);
+  border: none;
+}
 /* =========================================
    DESKTOP (TABLET OCH UPPÅT)
 ========================================= */

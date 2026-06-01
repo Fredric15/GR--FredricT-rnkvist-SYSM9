@@ -108,8 +108,8 @@ export default function Navbar() {
           >
             <ShoppingCart size={24} />
             {/* Visa siffra om det finns något i varukorgen */}
-            {cartCount > 0 && (
-              <span className="navbar__cart-badge">{cartCount}</span>
+            {cartCount() > 0 && (
+              <span className="navbar__cart-badge">{cartCount()}</span>
             )}
           </Link>
 

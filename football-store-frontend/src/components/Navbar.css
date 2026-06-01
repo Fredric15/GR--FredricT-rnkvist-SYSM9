@@ -74,7 +74,6 @@
   padding: 0;
 }
 
-/* Modifier: När isOpen är true i React */
 .navbar__menu--active {
   display: flex; /* Visar menyn när man klickat på hamburgaren */
 }
@@ -96,11 +95,14 @@
 
 /* Varukorgs-ikonen & siffran */
 .navbar__link--cart {
+  position: relative;
+  display: flex;
+  align-items: center;
   gap: 8px;
 }
 
 .navbar__cart-badge {
-  background-color: var(--color-primary);
+  background-color: var(--color-favorite);
   position: absolute;
   top: -6px;
   right: -8px;

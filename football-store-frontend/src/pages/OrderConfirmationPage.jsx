@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import ProgressBar from '../components/ProgressBar.jsx';
-// import './OrderConfirmationPage.css';
+import './OrderConfirmationPage.css';
 
 export default function OrderConfirmationPage() {
   const location = useLocation();
@@ -24,9 +24,10 @@ export default function OrderConfirmationPage() {
   }
 
   const totalQuantity = orderData.orderItems.reduce((total, item) => total + (item.quantity || item.qty || 1), 0);
-  const frakt = orderData.delsumma > 899 ? 0 : 49;
-  const moms = orderData.delsumma * 0.25;
+  const frakt = orderData.totalPrice > 899 ? 0 : 49;
+  const moms = orderData.totalPrice * 0.25;
   const delsumma = orderData.totalPrice - frakt - moms;
+
 
   return (
     <div className="order-confirmation">
@@ -41,10 +42,7 @@ export default function OrderConfirmationPage() {
             Tack för din beställning!
           </h1>
 
-          <h1 className="order-confirmation__title-desktop">
-            Din order har mottagits!
-          </h1>
-          <p className="order-confirmation__order-nr">
+<p className="order-confirmation__order-nr">
             Ordernummer: #{orderData._id.slice(-6).toUpperCase()}
           </p>
 
@@ -98,7 +96,7 @@ export default function OrderConfirmationPage() {
         <div className="order-confirmation__summary">
           <div className="order-summary__row">
             <span>Delsumma</span>
-            <span>{Math.round(delsumma + moms)} kr</span>
+            <span>{Math.round(delsumma)} kr</span>
           </div>
           <div className="order-summary__row">
             <span>Leverans</span>
