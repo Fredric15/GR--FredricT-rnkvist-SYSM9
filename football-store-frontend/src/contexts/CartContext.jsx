@@ -71,6 +71,21 @@ export function CartProvider({ children }) {
     return cartItems.reduce((count, item) => count + item.quantity, 0);
   }
 
+  function getOrderSummary() {
+
+    const total = cartTotal();
+    const frakt = total > 899 ? 0 : 49;
+    const moms = total * 0.25;
+    const totalPrice = total + frakt + moms;
+    return {
+      total,
+      frakt,
+      moms,
+      totalPrice,
+    };
+  }
+
+
   return (
     <CartContext.Provider
       value={{
@@ -81,6 +96,7 @@ export function CartProvider({ children }) {
         clearCart,
         cartTotal,
         cartCount,
+        getOrderSummary,
       }}
     >
       {children}

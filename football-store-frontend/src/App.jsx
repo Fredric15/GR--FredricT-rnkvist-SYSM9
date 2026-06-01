@@ -10,6 +10,7 @@ import Home from "./pages/Home.jsx";
 import Footer from "./components/Footer.jsx";
 import ProductsPage from "./pages/ProductsPage.jsx";
 import CartPage from "./pages/CartPage.jsx";
+import CheckoutPage from "./pages/CheckoutPage.jsx";
 import "./App.css";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
                 element={<ProductsPage />}
               />
               <Route path="/cart" element={<CartPage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
             </Routes>
           </main>
 

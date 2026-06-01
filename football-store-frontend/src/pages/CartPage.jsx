@@ -10,10 +10,7 @@ import "./CartPage.css";
 export default function CartPage() {
   const { cartItems, removeFromCart, updateQuantity, cartTotal } = useCart();
 
-  const totalPrice = cartTotal();
-  const moms = totalPrice * 0.25;
-  const frakt = totalPrice > 899 || totalPrice === 0 ? 0 : 49;
-  const totalWithMoms = totalPrice + moms;
+
 
   if (cartItems.length === 0) {
     return (
@@ -51,12 +48,7 @@ export default function CartPage() {
         </div>
 
         <div className="cart-page__summary-wrapper">
-          <CartSummary
-            total={totalPrice}
-            frakt={frakt}
-            moms={moms}
-            slutsumma={totalWithMoms + frakt}
-          />
+          <CartSummary />
         </div>
       </div>
     </div>
