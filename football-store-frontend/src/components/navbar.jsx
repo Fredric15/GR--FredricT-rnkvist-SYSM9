@@ -6,7 +6,7 @@ import { useCart } from "../contexts/CartContext.jsx";
 import {
   ShoppingCart,
   User,
-  UserCheckIcon,
+  House,
   Search,
   X,
   Menu,
@@ -72,7 +72,7 @@ export default function Navbar() {
           </li>
         </ul>
 
-        {/* HÖGER: Utilities (Sök, Profil, Varukorg, Hamburgare) */}
+        {/* Utilities (Sök, Profil, Varukorg, Hamburgare) */}
         <div className="navbar__utilities">
           {/* Sök-ikon för mobil (Döljs på desktop) */}
           <button
@@ -93,12 +93,15 @@ export default function Navbar() {
           </div>
 
           {/* Profilikon */}
-          <button
+          <Link
+            to={isAuth ? "/profile" : "/login"}
             className="navbar__icon-btn navbar__icon-btn--user"
             aria-label="Profil"
+            onClick={closeMenu}
           >
-            <User size={24} />
-          </button>
+            {/* Om inloggad, visa hus-ikonen, annars använd User-ikonen */}
+             {isAuth ? <House size={24} /> : <User size={24} />}
+          </Link>
 
           {/* Varukorg */}
           <Link

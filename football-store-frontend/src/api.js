@@ -58,31 +58,35 @@ export function getMyOrders() {
 //Genrella request-funktionen
 
 async function request(path, options = {}) {
-    const headers = options.headers || {};
-    const token = getToken();
-    if (token) {
-        headers["Authorization"] = `Bearer ${token}`;
-    }
+  const headers = options.headers || {};
+  const token = getToken();
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
 
-    headers["Content-Type"] = "application/json";
+  headers["Content-Type"] = "application/json";
 
-    const response = await fetch(`${API_BASE}${path}`, {
-        ...options,
-        headers,
-    });
+  const response = await fetch(`${API_BASE}${path}`, {
+    ...options,
+    headers,
+  });
 
-    const text = await response.text();
-    let data = null;
-    try {
-        data = JSON.parse(text);
-    } catch (e) {
-        // Om det inte är JSON, returnera texten som den är
-        data = text;
-    }
+  const text = await response.text();
+  let data = null;
+  try {
+    data = JSON.parse(text);
+  } catch (e) {
+    // Om det inte är JSON, returnera texten som den är
+    data = text;
+  }
 
-    if (!response.ok) {
-        throw new Error(data?.message || "Något gick fel vid API-anropet");
-    }
+  if (!response.ok) {
+    console.log("Fel från backend:", data);
 
-    return data;
+    const errorMessage =
+      data?.message || data?.error || "Ett fel inträffade. Försök igen senare.";
+    throw new Error(errorMessage);
+  }
+
+  return data;
 }

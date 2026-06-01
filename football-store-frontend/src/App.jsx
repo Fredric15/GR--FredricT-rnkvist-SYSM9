@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import Home from "./pages/Home.jsx";
+import AuthPage from "./pages/AuthPage.jsx";
 import Footer from "./components/Footer.jsx";
 import ProductsPage from "./pages/ProductsPage.jsx";
 import CartPage from "./pages/CartPage.jsx";
@@ -36,6 +37,7 @@ function App() {
                 path="/order-confirmation"
                 element={<OrderConfirmationPage />}
               />
+              <Route path="/login" element={<AuthPage />} />
             </Routes>
           </main>
 

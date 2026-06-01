@@ -61,6 +61,12 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ email });
 
+  if(!user) {
+    res.status(401);
+    throw new Error("Användaren finns ej.");
+  }
+  
+
   if (user && (await bcrypt.compare(password, user.password))) {
     const accessToken = jwt.sign(
       { user: { id: user.id, email: user.email, isAdmin: user.isAdmin } },
