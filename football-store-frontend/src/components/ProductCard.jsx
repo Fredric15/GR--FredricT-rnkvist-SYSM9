@@ -3,14 +3,17 @@ import { useCart } from "../contexts/CartContext.jsx";
 import React, { useState } from "react";
 import { useAuth } from "../contexts/AuthContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
-import { toggleFavoriteAPI } from "../api.js";
+import { useFavorites } from "../contexts/FavoritesContext.jsx";
 import "./ProductCard.css";
 
 export default function ProductCard({ product }) {
   const { addToCart } = useCart();
   const { isAuth } = useAuth();
+  const { toggleFavorite, checkIsFavorite } = useFavorites();
   const navigate = useNavigate();
-  const [isFavorite, setIsFavorite] = useState(false);
+
+  // State för att hålla koll på om produkten är favorit eller inte
+  const isFavorite = checkIsFavorite(product._id);
 
   const handleFavoriteClick = async (e) => {
     e.preventDefault();
@@ -18,18 +21,11 @@ export default function ProductCard({ product }) {
     //Om användaren inte är inloggasd, skicka till login-sidan
     if (!isAuth) {
       alert("Du måste vara inloggad för att lägga till favoriter!");
-      navigate("/login"); 
+      navigate("/login");
       return;
     }
 
-    setIsFavorite((prev) => !prev);
-
-    try {
-      await toggleFavoriteAPI(product._id); // Anropa API för att toggla favoritstatus
-    } catch (err) {
-      console.error("Kunde inte uppdatera favoriter:", err);
-      setIsFavorite((prev) => !prev); // Återställ favoritstatus vid fel
-    }
+    toggleFavorite(product); // Uppdatera favoritstatus i kontexten
   };
 
   return (

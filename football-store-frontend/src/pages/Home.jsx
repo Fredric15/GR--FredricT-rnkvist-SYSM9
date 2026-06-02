@@ -14,6 +14,14 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const { addToCart } = useCart();
 
+  const scrollToProducts = (e) => {
+    e.preventDefault();
+    const section = document.querySelector(".home__showcase");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -39,37 +47,49 @@ export default function Home() {
         />
         <div className="hero__content">
           <h1 className="hero__title">BÄR DIN PASSION</h1>
-          <p className="hero__text">
-            Hitta matchtröjan för ditt favoritlag idag
-          </p>
-          <Link to="/products/allsvenskan" className="hero__btn">
+          <p className="hero__text">Hitta matchtröjan för ditt favoritlag</p>
+          <a
+            href="#popular-products"
+            className="hero__btn"
+            onClick={scrollToProducts}
+          >
             Shoppa nu
-          </Link>
+          </a>
         </div>
       </section>
 
       <div className="home__main">
         <UspRow className="home__usp-row" />
 
-        <div className="home__banner">
-          <img
-            src={mainImage}
-            alt="Fotbollsspelare i aktion"
-            className="home__banner-image"
-          />
+        <div className="home__showcase" id="popular-products">
+          <div className="home__showcase-left">
+            <img
+              src={mainImage}
+              alt="Fotbollsspelare i aktion"
+              className="home__showcase-image"
+            />
+          </div>
+          <div className="home__showcase-right">
+            <h2 className="home__section-title">POPULÄRA PRODUKTER</h2>
+
+            {/* Produktnätet - Just nu med platshållare för att du ska kunna styla layouten */}
+            {isLoading ? (
+              <p>Laddar produkter...</p>
+            ) : (
+              <ProductGrid products={popularProducts} variant="carousel" />
+            )}
+          </div>
         </div>
 
-        <h2 className="home__section-title">POPULÄRA PRODUKTER</h2>
-
-        {/* Produktnätet - Just nu med platshållare för att du ska kunna styla layouten */}
-        {isLoading ? (
-          <p>Laddar produkter...</p>
-        ) : (
-          <ProductGrid products={popularProducts} variant="carousel" />
-        )}
-
         {/* Filtreringsraden / Kategorierna */}
-        <div className="home__filters">
+        <div className="home__categories-row">
+          <Link
+            to="/products"
+            className="home__filter-link"
+            style={{ fontWeight: "bold" }}
+          >
+            Alla produkter
+          </Link>
           <Link to="/products/allsvenskan" className="home__filter-link">
             Allsvenskan
           </Link>

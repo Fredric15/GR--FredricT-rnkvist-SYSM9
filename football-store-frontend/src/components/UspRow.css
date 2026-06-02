@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column; /* Stapla dem på mobilen */
   gap: var(--spacing-sm);
-  padding: var(--spacing-md) 0;
+  /* padding: var(--spacing-md) 0; */
   background-color: var(
     --color-bg-light
   );
@@ -33,7 +33,7 @@
     flex-direction: row; /* Lägg dem sida vid sida! */
     justify-content: space-between; /* Sprid ut dem jämnt */
     background-color: transparent; /* Ta bort bakgrunden om du vill att den ska smälta in */
-    padding: var(--spacing-lg) 0;
+    padding: var(--spacing-xs);
   }
 
   .usp-row__item {

@@ -6,14 +6,12 @@
 
 .app__main {
   flex: 1;
-
-  padding: var(--spacing-sm);
-
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%; /* Centrerar innehållet på skärmen */
+  width: 100%;
 }
 
-
-
-
+.page-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 16px;
+  width: 100%;
+}

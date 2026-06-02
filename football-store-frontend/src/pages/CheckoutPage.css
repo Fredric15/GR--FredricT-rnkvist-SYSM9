@@ -115,11 +115,6 @@
 
 /* --- Betalningsätt --- */
 
-.checkout-payment {
-  margin-top: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
-}
-
 .checkout-payment h3 {
   font-size: 0.85rem;
   font-weight: 700;
@@ -141,7 +136,6 @@
   border-radius: 8px;
   cursor: pointer;
   background-color: var(--color-white);
-  transition: all 0.2s ease;
 }
 
 .checkout-payment__option.active {
@@ -162,7 +156,26 @@
   transition:
     transform 0.2s ease,
     filter 0.2s ease;
-  margin-top: var(--spacing-md);
+}
+
+.checkout-submit-btn:disabled {
+  background-color: #cccccc; /* Grå färg */
+  color: #666666; /* Mörkgrå text */
+  cursor: not-allowed; /* Visar en överkorsad muspekare/förbudsskylt */
+  opacity: 0.7;
+  transform: none; /* Ser till att den inte "hoppar" om du har hover-effekter */
+}
+
+/* ErrorMeddelande */
+.checkout-form__error {
+  background-color: #fdf7f7;
+  color: #d9534f;
+  border: 1px solid #d9534f;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-align: center;
+  font-size: 0.95rem;
 }
 
 /* --- Desktopversion --- */
@@ -191,8 +204,6 @@
 
   .checkout-form-container {
     flex: 1;
-
     padding-right: var(--spacing-xl);
   }
-
 }

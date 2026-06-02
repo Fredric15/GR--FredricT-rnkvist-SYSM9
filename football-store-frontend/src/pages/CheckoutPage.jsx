@@ -6,6 +6,10 @@ import CartSummary from "../components/CartSummary.jsx";
 import CheckoutItemsList from "../components/CheckoutItemsList.jsx";
 import { createOrder } from "../api.js";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import swishLogo from "../assets/images/swish-logo.svg";
+import klarnaLogo from "../assets/images/klarna-logo.svg";
+import mastercardLogo from "../assets/images/mastercard-logo.svg";
+import visaLogo from "../assets/images/visa-logo.svg";
 import "./CheckoutPage.css";
 
 export default function CheckoutPage() {
@@ -14,9 +18,7 @@ export default function CheckoutPage() {
 
   // State för att hålla koll på om sammanfattningen är öppen eller inte på mobil
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
-
   const [paymentMethod, setPaymentMethod] = useState("");
-
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -26,6 +28,8 @@ export default function CheckoutPage() {
     country: "",
     phone: "",
   });
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -37,6 +41,26 @@ export default function CheckoutPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (
+      !formData.fullName.trim() ||
+      !formData.email.trim() ||
+      !formData.address.trim() ||
+      !formData.city.trim() ||
+      !formData.postalCode.trim() ||
+      !formData.country.trim() ||
+      !formData.phone.trim()
+    ) {
+      setErrorMessage("Vänligen fyll i alla obligatoriska fält.");
+      return;
+    }
+
+    if (!paymentMethod) {
+      setErrorMessage("Vänligen välj ett betalsätt.");
+      return;
+    }
+
+    setErrorMessage("");
 
     console.log("Orderdata:", {
       ...formData,
@@ -76,7 +100,9 @@ export default function CheckoutPage() {
       navigate("/order-confirmation", { state: { orderData: savedOrder } });
     } catch (error) {
       console.error("Kunde inte skicka ordern:", error);
-      alert("Ett fel uppstod när din order skulle hanteras. Försök igen!");
+      setErrorMessage(
+        "Ett fel uppstod när din order skulle hanteras. Försök igen!",
+      );
     }
   };
 
@@ -120,7 +146,7 @@ export default function CheckoutPage() {
           <p className="checkout-form__disclaimer">
             Fält markerade med * är obligatoriska.
           </p>
-          <form className="checkout-form" onSubmit={handleSubmit}>
+          <form className="checkout-form" onSubmit={handleSubmit} noValidate>
             <div className="checkout-form__group">
               <label htmlFor="fullName">Fullständigt namn *</label>
               <input
@@ -205,34 +231,61 @@ export default function CheckoutPage() {
                   className={`checkout-payment__option ${paymentMethod === "swish" ? "active" : ""}`}
                   onClick={() => setPaymentMethod("swish")}
                 >
-                  <span style={{ color: "#00A8EE", fontWeight: "bold" }}>
-                    Swish
-                  </span>
+                  <img
+                    src={swishLogo}
+                    alt="Swish"
+                    style={{
+                      width: "auto",
+                      height: "40px",
+                      objectFit: "contain",
+                    }}
+                  />
                 </div>
                 <div
                   className={`checkout-payment__option ${paymentMethod === "klarna" ? "active" : ""}`}
                   onClick={() => setPaymentMethod("klarna")}
                 >
-                  <span style={{ color: "#FFB3C7", fontWeight: "bold" }}>
-                    Klarna
-                  </span>
+                  <img
+                    src={klarnaLogo}
+                    alt="Klarna"
+                    style={{
+                      width: "auto",
+                      height: "40px",
+                      objectFit: "contain",
+                    }}
+                  />
                 </div>
                 <div
                   className={`checkout-payment__option ${paymentMethod === "card" ? "active" : ""}`}
                   onClick={() => setPaymentMethod("card")}
                 >
-                  <span style={{ color: "#1A1F71", fontWeight: "bold" }}>
-                    Kort
-                  </span>
+                  <img
+                    src={visaLogo}
+                    alt="Visa"
+                    style={{
+                      width: "auto",
+                      height: "40px",
+                      objectFit: "contain",
+                    }}
+                  />
+                  <img
+                    src={mastercardLogo}
+                    alt="Mastercard"
+                    style={{
+                      width: "auto",
+                      height: "40px",
+                      objectFit: "contain",
+                    }}
+                  />
                 </div>
               </div>
             </div>
 
-            <button
-              type="submit"
-              className="checkout-submit-btn"
-              disabled={!paymentMethod}
-            >
+            {errorMessage && (
+              <div className="checkout-form__error">{errorMessage}</div>
+            )}
+
+            <button type="submit" className="checkout-submit-btn">
               Betala{" "}
               {getOrderSummary().totalPrice > 0
                 ? `- ${getOrderSummary().totalPrice.toFixed(2)} kr`
