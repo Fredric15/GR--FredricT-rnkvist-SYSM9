@@ -1,0 +1,111 @@
+.profile-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-md);
+  min-height: 70vh;
+}
+
+.profile-page__loading {
+  text-align: center;
+  padding: 100px;
+  font-size: 1.2rem;
+  color: var(--color-text-light);
+}
+
+.profile-page__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+  border-bottom: 2px solid var(--color-bg-light);
+  padding-bottom: var(--spacing-md);
+}
+
+.profile-page__header h1 {
+  font-size: var(--font-size-xlarge);
+  color: var(--color-text);
+}
+
+.profile-page__logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.profile-page__logout-btn:hover {
+  background-color: #ffeeee;
+  border-color: #ff3b30;
+  color: #ff3b30;
+}
+
+.icon-align {
+  vertical-align: middle;
+  margin-right: 8px;
+  color: var(--color-primary);
+}
+
+.profile-page__content h2 {
+  font-size: var(--font-size-large);
+  margin-bottom: var(--spacing-md);
+}
+
+.profile-page__empty {
+  background-color: var(--color-bg-light);
+  padding: var(--spacing-xl);
+  text-align: center;
+  border-radius: 8px;
+  color: var(--color-text-light);
+}
+
+/* Korten för varje enskild order */
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.order-card {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.order-card__header {
+  background-color: var(--color-bg-light);
+  padding: var(--spacing-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.order-card__date {
+  font-weight: 800;
+  display: block;
+  font-size: var(--font-size-base);
+}
+
+.order-card__id {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+}
+
+.order-card__total {
+  font-weight: 800;
+  font-size: var(--font-size-large);
+  color: var(--color-primary);
+}
+
+.order-card__body {
+  padding: var(--spacing-md);
+  background-color: var(--color-white);
+}

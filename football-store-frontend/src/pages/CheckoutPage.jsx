@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../contexts/CartContext.jsx";
 import CartSummary from "../components/CartSummary.jsx";
 import CheckoutItemsList from "../components/CheckoutItemsList.jsx";
+import { createOrder } from "../api.js";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import "./CheckoutPage.css";
 
@@ -68,17 +69,8 @@ export default function CheckoutPage() {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/api/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(orderPayload),
-      });
+      const savedOrder = await createOrder(orderPayload);
 
-      if (!response.ok) {
-        throw new Error("Något gick fel vid orderläggningen");
-      }
-
-      const savedOrder = await response.json();
       console.log("Order sparad:", savedOrder);
       clearCart();
       navigate("/order-confirmation", { state: { orderData: savedOrder } });

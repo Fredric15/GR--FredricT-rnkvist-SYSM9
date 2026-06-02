@@ -13,11 +13,12 @@ const createOrder = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Inga orderartiklar");
   }
-
+  console.log("Header från frontend:", req.headers.authorization);
   let userId = null;
 
   // Försök att hämta token från headern
   const authHeader = req.headers.authorization || req.headers.Authorization;
+
   if (authHeader && authHeader.startsWith("Bearer ")) {
     try {
       const token = authHeader.split(" ")[1];
@@ -26,7 +27,10 @@ const createOrder = asyncHandler(async (req, res) => {
       //Om token finns, spara userId i orderModeln
       userId = decoded.user.id;
     } catch (error) {
-      console.log("Ogiltig token, fortsätter som gäst med null som userId");
+      console.log(
+        error.message,
+        "Ogiltig token, fortsätter som gäst med null som userId",
+      );
     }
   }
 
