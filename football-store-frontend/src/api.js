@@ -42,6 +42,19 @@ export function RegisterUser(name, email, password) {
   });
 }
 
+export function toggleFavoriteAPI(productId) {
+  return request("/users/favorites", {
+    method: "POST",
+    body: JSON.stringify({ productId }),
+  });
+}
+
+export function getFavoriteProductsAPI() {
+  return request("/users/favorites", {
+    method: "GET",
+  });
+}
+
 export function createOrder(orderData) {
   return request("/orders", {
     method: "POST",

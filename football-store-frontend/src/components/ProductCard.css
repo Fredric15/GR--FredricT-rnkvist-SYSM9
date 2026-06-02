@@ -1,0 +1,147 @@
+/* =========================================
+   PRODUCT CARD
+========================================= */
+
+.product-card {
+  position: relative;
+  background-color: var(--color-white);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-xs);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.product-card__favorite-btn {
+  position: absolute;
+  top: var(--spacing-xs);
+  right: var(--spacing-xs);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+  padding: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.product-card__image-link {
+  text-decoration: none;
+  display: block;
+  margin-bottom: var(--spacing-sm);
+}
+
+.product-card__image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 160px;
+}
+
+.product-card__image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.product-card__info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 4px;
+}
+
+.product-card__name-link,
+.product-card__league-link {
+  text-decoration: none;
+}
+
+.product-card__title {
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.product-card__league {
+  font-size: var(--font-size-small);
+  color: var(--color-text-light);
+}
+
+.product-card__action-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.product-card__price {
+  font-size: var(--font-size-small);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.add-to-cart-btn {
+  background: var(--gradient-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-small);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+/* Desktop (Tablet och uppåt) */
+@media (min-width: 768px) {
+  .product-card {
+    padding: var(--spacing-xs) var(--spacing-xs);
+  }
+
+  .product-card__image-link {
+    margin-bottom: 12px;
+  }
+  .product-card__image-wrapper {
+    height: 220px;
+  }
+
+  .product-card__title {
+    font-size: 0.85rem;
+  }
+
+  .product-card__league {
+    font-size: 0.8rem;
+    margin: 0 0 20px 0;
+  }
+
+  .product-card__price {
+    font-size: 1.2rem;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-card__favorite-btn:hover {
+    transform: scale(1.1);
+  }
+  .product-card__favorite-btn {
+    transform: scale(0.95);
+  }
+
+  .product-card__heart-icon:hover {
+    color: var(--color-favorite);
+  }
+
+  .product-card__heart-icon--active {
+    fill: var(--color-favorite);
+    color: var(--color-favorite);
+    transition: color 0.2s ease, fill 0.2s ease;
+  }
+}
