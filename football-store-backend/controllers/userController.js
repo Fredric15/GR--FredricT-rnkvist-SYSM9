@@ -61,11 +61,10 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ email });
 
-  if(!user) {
+  if (!user) {
     res.status(401);
     throw new Error("Användaren finns ej.");
   }
-  
 
   if (user && (await bcrypt.compare(password, user.password))) {
     const accessToken = jwt.sign(
@@ -164,6 +163,42 @@ const deleteUser = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc Toggla en produkt i användarens favoritlista
+// @route POST /api/users/favorites
+// @access Private
+const toggleFavoriteProduct = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user.id);
+  const { productId } = req.body;
+
+  if (!user) {
+    res.status(404);
+    throw new Error("Användare hittades inte");
+  }
+
+  const isFavorite = user.favoriteProducts.includes(productId);
+
+  isFavorite
+    ? user.favoriteProducts.pull(productId) // Ta bort från favoritlistan
+    : user.favoriteProducts.addToSet(productId); // Lägg till i favoritlistan och undviker dubbletter
+
+  await user.save();
+  res.json({ favoriteProducts: user.favoriteProducts });
+});
+
+// @desc    Hämta användarens favoritprodukter
+// @route   GET /api/users/favorites
+// @access  Private
+const getFavoriteProducts = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user.id).populate("favoriteProducts");
+
+  if (!user) {
+    res.status(404);
+    throw new Error("Användare hittades inte");
+  }
+
+  res.json({ favoriteProducts: user.favoriteProducts });
+});
+
 module.exports = {
   registerUser,
   loginUser,
@@ -171,4 +206,6 @@ module.exports = {
   getUserProfile,
   updateUserProfile,
   deleteUser,
+  toggleFavoriteProduct,
+  getFavoriteProducts,
 };

@@ -32,6 +32,12 @@ const userSchema = new mongoose.Schema(
         type: String,
       },
     },
+    favoriteProducts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+      },
+    ],
     isAdmin: {
       type: Boolean,
       required: true,

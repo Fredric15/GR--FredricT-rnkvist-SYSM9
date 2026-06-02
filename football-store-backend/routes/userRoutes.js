@@ -7,6 +7,8 @@ const {
   updateUserProfile,
   getAllUsers,
   deleteUser,
+  toggleFavoriteProduct,
+  getFavoriteProducts,
 } = require("../controllers/userController");
 const validateToken = require("../middleware/validateTokenHandler");
 
@@ -20,5 +22,9 @@ router
   .get("/profile", validateToken, getUserProfile)
   .put("/profile", validateToken, updateUserProfile);
 router.delete("/:id", validateToken, deleteUser);
+
+router
+  .post("/favorites", validateToken, toggleFavoriteProduct)
+  .get("/favorites", validateToken, getFavoriteProducts);
 
 module.exports = router;
