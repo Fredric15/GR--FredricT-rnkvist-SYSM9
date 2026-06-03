@@ -96,8 +96,10 @@ async function request(path, options = {}) {
   if (!response.ok) {
     console.log("Fel från backend:", data);
 
-    //Lägger till detta för att REACT ska kunna logga ut användare automatiskt om token har gått ut
-    if (response.status === 401) {
+    //Event för att kunna logga ut användare automatiskt om token har gått ut
+    //Här lägger jag även till så att errorMessage inte visar "Autentisering har gått ut" om man står på login sidan.
+    if (!(path.includes("/users/login")) && response.status === 401) {
+
       logout();
       window.dispatchEvent(new Event("auth-expired"));
       throw new Error("Autentisering har gått ut. Vänligen logga in igen.");

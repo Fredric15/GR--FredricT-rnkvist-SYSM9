@@ -1,16 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { getProducts } from "../api";
 import { useCart } from "../contexts/CartContext.jsx";
 import { Link, useParams } from "react-router-dom";
 import ProductGrid from "../components/ProductGrid.jsx";
-import { SlidersHorizontal } from "lucide-react";
+import { ArrowUpDown } from "lucide-react";
 import "./ProductsPage.css";
+
+const sortStrategies = {
+  "price-asc": (a, b) => a.price - b.price,
+  "price-desc": (a, b) => b.price - a.price,
+  "name-asc": (a, b) => a.name.localeCompare(b.name),
+  "name-desc": (a, b) => b.name.localeCompare(a.name),
+  default: () => 0,
+};
 
 export default function ProductsPage() {
   const [allProducts, setAllProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { addToCart } = useCart();
   const { leagueName, teamName } = useParams();
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  const [sortMethod, setSortMethod] = useState("default");
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -51,6 +61,15 @@ export default function ProductsPage() {
         return dbTeamSlug === teamName;
       })
     : leagueProducts;
+
+  const sortedProducts = useMemo(
+    () =>
+      [...displayedProducts].sort(
+        sortStrategies[sortMethod] || sortStrategies["default"],
+      ),
+    [displayedProducts, sortMethod],
+  );
+
   return (
     <div className="page-container">
       <div className="products-page">
@@ -117,20 +136,66 @@ export default function ProductsPage() {
         {/* 2. META-RADEN (Antal produkter & Sorteringsknapp) */}
         <div className="products-page__meta">
           <div className="products-page__count">
-            Antal Produkter: <strong>{leagueProducts.length}</strong>
+            Antal Produkter: <strong>{displayedProducts.length}</strong>
           </div>
 
-          <button className="products-page__filter-btn">
-            Filter och sortering
-            <SlidersHorizontal size={18} />
-          </button>
+          <div className="products-page__sort-container">
+            <button
+              className="products-page__filter-btn"
+              onClick={() => setIsSortOpen((prev) => !prev)}
+            >
+              Sortering
+              <ArrowUpDown size={18} />
+            </button>
+
+            {isSortOpen && (
+              <div className="products-page__sort-dropdown">
+                <button
+                  className={sortMethod === "price-asc" ? "active" : ""}
+                  onClick={() => {
+                    setSortMethod("price-asc");
+                    setIsSortOpen(false); // Stänger menyn vid klick
+                  }}
+                >
+                  Pris: Lågt till högt
+                </button>
+                <button
+                  className={sortMethod === "price-desc" ? "active" : ""}
+                  onClick={() => {
+                    setSortMethod("price-desc");
+                    setIsSortOpen(false);
+                  }}
+                >
+                  Pris: Högt till lågt
+                </button>
+                <button
+                  className={sortMethod === "name-asc" ? "active" : ""}
+                  onClick={() => {
+                    setSortMethod("name-asc");
+                    setIsSortOpen(false);
+                  }}
+                >
+                  Bokstavsordning (A-Ö)
+                </button>
+                <button
+                  className={sortMethod === "name-desc" ? "active" : ""}
+                  onClick={() => {
+                    setSortMethod("name-desc");
+                    setIsSortOpen(false);
+                  }}
+                >
+                  Bokstavsordning (Ö-A)
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* 3. PRODUKTNÄTET (ProductGrid) */}
         {isLoading ? (
           <p>Laddar produkter...</p>
         ) : (
-          <ProductGrid products={displayedProducts} />
+          <ProductGrid products={sortedProducts} />
         )}
       </div>
     </div>

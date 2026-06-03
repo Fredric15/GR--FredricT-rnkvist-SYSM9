@@ -3,12 +3,16 @@ import { isAuthenticated, setToken, logout } from "../api";
 
 const AuthContext = createContext(null);
 
+// En flagga för att undvika att visa flera alert när token har gått ut
+let hasAlertedForExpiredToken = false;
+
 export function AuthProvider({ children }) {
   const [isAuth, setIsAuth] = useState(isAuthenticated());
 
   function login(token) {
     setToken(token);
     setIsAuth(true);
+    hasAlertedForExpiredToken = false;
   }
 
   function logoutUser() {
@@ -19,7 +23,11 @@ export function AuthProvider({ children }) {
   // Lyssna på "auth-expired" eventet för att automatiskt logga ut användaren
   useEffect(() => {
     const handleTokenExpired = () => {
-      alert("Din session har gått ut. Vänligen logga in igen.");
+        //Med detta så undviker jag att visa alerten två gånger när token har gått ut
+      if (!hasAlertedForExpiredToken) {
+        alert("Din session har gått ut. Vänligen logga in igen.");
+        hasAlertedForExpiredToken = true;
+      }
       logoutUser();
     };
 
