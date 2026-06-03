@@ -1,0 +1,118 @@
+/* Mobile first */
+
+.product-detail-page {
+  padding-top: var(--spacing-lg);
+  padding-bottom: var(--spacing-xl);
+}
+
+.back-link {
+  display: block;
+  width: fit-content;
+margin: 20px auto var(--spacing-sm) auto;
+  color: var(--color-text-light);
+  font-weight: 500;
+  text-decoration: none;
+    padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  color: var(--color-text);
+  font-size: var(--font-size-small);
+  text-decoration: none;
+
+  
+}
+
+.product-detail__container {
+  background-color: var(--color-bg-light);
+  padding: var(--spacing-lg);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+.product-detail__image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-white);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+}
+
+.product-detail__image {
+  width: 100%;
+  max-width: 350px;
+  object-fit: contain;
+}
+
+.product-detail__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product-detail__name {
+  font-size: var(--font-size-large);
+}
+
+.product-detail__league-link {
+  color: var(--color-text-light);
+  font-size: var(--font-size-base);
+  text-decoration: none;
+  margin-bottom: var(--spacing-md);
+  align-self: flex-start;
+}
+
+.product-detail__price {
+  font-size: var(--font-size-large);
+  font-weight: 700;
+  margin-bottom: var(--spacing-lg);
+}
+
+.product-detail__description {
+  margin-bottom: var(--spacing-xl);
+}
+.product-detail__description p {
+  line-height: 1.6;
+  color: var(--color-text-light);
+  font-size: var(--font-size-base);
+}
+
+.product-detail__bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  border-top: 1px solid var(--color-bg-light);
+  padding-top: var(--spacing-md);
+}
+
+.product-detail__price {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--color-text);
+  margin: 0;
+}
+
+@media (hover: hover) {
+  .add-to-cart-btn:hover {
+    opacity: 0.9;
+  }
+  .back-link:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    
+  }
+}
+
+@media (min-width: 768px) {
+  .product-detail__container {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    padding: var(--spacing-xl);
+  }
+
+    .product-detail__name {
+        font-size: 1.5rem;
+    }
+}

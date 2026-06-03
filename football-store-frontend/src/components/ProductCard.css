@@ -77,12 +77,14 @@
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
+  gap: var(--spacing-xs);
 }
 
 .product-card__price {
   font-size: var(--font-size-small);
   font-weight: 600;
   color: var(--color-text);
+  white-space: nowrap;
 }
 
 .add-to-cart-btn {
@@ -91,10 +93,9 @@
   border: none;
   border-radius: var(--border-radius);
   padding: var(--spacing-xs) var(--spacing-sm);
-  font-size: var(--font-size-small);
+  font-size: 0.7rem;
   font-weight: 700;
-  cursor: pointer;
-  transition: background 0.2s ease;
+  white-space: nowrap;
 }
 
 /* Desktop (Tablet och uppåt) */
@@ -142,6 +143,13 @@
   .product-card__heart-icon--active {
     fill: var(--color-favorite);
     color: var(--color-favorite);
-    transition: color 0.2s ease, fill 0.2s ease;
+    transition:
+      color 0.2s ease,
+      fill 0.2s ease;
+  }
+
+  .add-to-cart-btn:hover {
+    cursor: pointer;
+    opacity: 0.9;
   }
 }

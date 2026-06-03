@@ -1,11 +1,27 @@
 /* =========================================
-   PRODUCT GRID (Det befintliga rutnätet)
+   PRODUCT GRID (Mobil)
 ========================================= */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-sm);
   width: 100%;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-lg);
+  }
 }
 
 /* =========================================

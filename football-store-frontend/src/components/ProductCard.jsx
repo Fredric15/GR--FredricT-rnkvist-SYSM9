@@ -12,6 +12,13 @@ export default function ProductCard({ product }) {
   const { toggleFavorite, checkIsFavorite } = useFavorites();
   const navigate = useNavigate();
 
+  const leagueSlug = product.league
+    ? product.league.toLowerCase().replace(/\s+/g, "-")
+    : "okand-liga";
+  const teamSlug = product.team
+    ? product.team.toLowerCase().replace(/\s+/g, "-")
+    : "okant-lag";
+
   // State för att hålla koll på om produkten är favorit eller inte
   const isFavorite = checkIsFavorite(product._id);
 
@@ -26,6 +33,8 @@ export default function ProductCard({ product }) {
     }
 
     toggleFavorite(product); // Uppdatera favoritstatus i kontexten
+
+
   };
 
   return (
@@ -42,7 +51,7 @@ export default function ProductCard({ product }) {
         />
       </button>
       <Link
-        to={`/products/${product._id}`}
+        to={`/products/${leagueSlug}/${teamSlug}/${product._id}`}
         className="product-card__image-link"
       >
         <div className="product-card__image-wrapper">
@@ -56,20 +65,20 @@ export default function ProductCard({ product }) {
 
       <div className="product-card__info">
         <Link
-          to={`/products/${product._id}`}
+          to={`/products/${leagueSlug}/${teamSlug}/${product._id}`}
           className="product-card__name-link"
         >
           <h3 className="product-card__title">{product.name}</h3>
         </Link>
 
         <Link
-          to={`/products/${product.league}`}
+          to={`/products/${leagueSlug}`}
           className="product-card__league-link"
         >
           <p className="product-card__league">{product.league}</p>
         </Link>
         <div className="product-card__action-row">
-          <span className="product-card__price">{product.price} SEK</span>
+          <span className="product-card__price">{product.price} Kr</span>
 
           <button
             className="add-to-cart-btn add-to-cart-btn--color-primary"

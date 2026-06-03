@@ -3,14 +3,7 @@ import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext.jsx";
 import { useCart } from "../contexts/CartContext.jsx";
-import {
-  ShoppingCart,
-  User,
-  House,
-  Search,
-  X,
-  Menu,
-} from "lucide-react";
+import { ShoppingCart, User, House, Search, X, Menu } from "lucide-react";
 
 export default function Navbar() {
   const { isAuth, logoutUser } = useAuth();
@@ -70,6 +63,17 @@ export default function Navbar() {
               La Liga
             </Link>
           </li>
+          {isAuth && (
+            <li className="navbar__item">
+              <Link
+                to="/products/favorites"
+                className="navbar__link"
+                onClick={closeMenu}
+              >
+                Mina Favoriter
+              </Link>
+            </li>
+          )}
         </ul>
 
         {/* Utilities (Sök, Profil, Varukorg, Hamburgare) */}
@@ -100,7 +104,7 @@ export default function Navbar() {
             onClick={closeMenu}
           >
             {/* Om inloggad, visa hus-ikonen, annars använd User-ikonen */}
-             {isAuth ? <House size={24} /> : <User size={24} />}
+            {isAuth ? <House size={24} /> : <User size={24} />}
           </Link>
 
           {/* Varukorg */}
