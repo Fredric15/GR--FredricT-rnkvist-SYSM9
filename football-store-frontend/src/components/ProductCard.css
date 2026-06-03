@@ -53,7 +53,7 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  gap: 4px;
+  gap: var(--spacing-xs);
 }
 
 .product-card__name-link,
@@ -62,7 +62,7 @@
 }
 
 .product-card__title {
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-small);
   font-weight: 700;
   color: var(--color-text);
 }
@@ -70,6 +70,8 @@
 .product-card__league {
   font-size: var(--font-size-small);
   color: var(--color-text-light);
+  padding: 0 0 var(--spacing-md) 0;
+
 }
 
 .product-card__action-row {
@@ -77,6 +79,7 @@
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
+  /* flex-wrap: wrap; */
   gap: var(--spacing-xs);
 }
 
@@ -84,23 +87,31 @@
   font-size: var(--font-size-small);
   font-weight: 600;
   color: var(--color-text);
+
   white-space: nowrap;
 }
 
 .add-to-cart-btn {
-  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-small);
+  font-weight: 600;
   color: var(--color-white);
   border: none;
   border-radius: var(--border-radius);
+  font-weight: var(--font-weight-small);
+  background: var(--gradient-primary);
   padding: var(--spacing-xs) var(--spacing-sm);
-  font-size: 0.7rem;
-  font-weight: 700;
   white-space: nowrap;
+  flex-wrap: wrap;
 }
 
 /* Desktop (Tablet och uppåt) */
 @media (min-width: 768px) {
   .product-card {
+    max-width: 275px;
     padding: var(--spacing-xs) var(--spacing-xs);
   }
 

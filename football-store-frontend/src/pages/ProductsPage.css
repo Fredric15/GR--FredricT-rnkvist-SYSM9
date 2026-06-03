@@ -10,7 +10,8 @@
   display: flex;
   gap: var(--spacing-xs);
   overflow-x: auto;
-  padding-bottom: var(--spacing-sm);
+  width: 100%;
+  padding-top: var(--spacing-xl);
 }
 
 .products-page__categories::-webkit-scrollbar {
@@ -46,6 +47,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: var(--spacing-md);
   border-top: 2px solid #eee;
 }
 

@@ -1,4 +1,4 @@
-import { Heart } from "lucide-react";
+import { Heart, ShoppingCart } from "lucide-react";
 import { useCart } from "../contexts/CartContext.jsx";
 import React, { useState } from "react";
 import { useAuth } from "../contexts/AuthContext.jsx";
@@ -33,8 +33,6 @@ export default function ProductCard({ product }) {
     }
 
     toggleFavorite(product); // Uppdatera favoritstatus i kontexten
-
-
   };
 
   return (
@@ -83,8 +81,9 @@ export default function ProductCard({ product }) {
           <button
             className="add-to-cart-btn add-to-cart-btn--color-primary"
             onClick={() => addToCart(product)}
+            aria-label={`Lägg ${product.name} i korgen`}
           >
-            LÄGG I VARUKORG
+            Lägg till <ShoppingCart size={18} strokeWidth={2} />
           </button>
         </div>
       </div>

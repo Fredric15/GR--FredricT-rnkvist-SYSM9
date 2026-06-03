@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { getProducts } from "../api";
 import { useCart } from "../contexts/CartContext.jsx";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import ProductGrid from "../components/ProductGrid.jsx";
 import { ArrowUpDown } from "lucide-react";
+import { useFavorites } from "../contexts/FavoritesContext.jsx";
 import "./ProductsPage.css";
 
 const sortStrategies = {
@@ -21,6 +22,9 @@ export default function ProductsPage() {
   const { leagueName, teamName } = useParams();
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [sortMethod, setSortMethod] = useState("default");
+  const { favoriteProducts } = useFavorites();
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("search")?.toLowerCase() || "";
 
   // Ref för sorteringsmenyn, används för att kunna stänga menyn med klick utanför
   const sortMenuRef = useRef(null);
@@ -54,24 +58,52 @@ export default function ProductsPage() {
     fetchProducts();
   }, []);
 
-  // 1. Filtrera först ut alla produkter som tillhör den valda ligan
-  const leagueProducts = leagueName
-    ? allProducts.filter((product) => {
-        // Skapa en slug av databasens värde: "Premier League" blir "premier-league"
-        const dbSlug = product.league.toLowerCase().replace(/\s+/g, "-");
+  // Om det finns en sökterm i URL:en, filtrera produkterna baserat på namn, lag eller liga
+  //Använder useMemo för att undvika onödiga beräkningar vid varje sökning
+  const searchedProducts = useMemo(() => {
+    if (!searchQuery) return allProducts;
 
-        // Jämför den nyskapade sluggen med URL:ens leagueName
-        return dbSlug === leagueName.toLowerCase();
-      })
-    : allProducts;
+    return allProducts.filter((product) => {
+      return (
+        product.name.toLowerCase().includes(searchQuery) ||
+        product.team.toLowerCase().includes(searchQuery) ||
+        product.league.toLowerCase().includes(searchQuery)
+      );
+    });
+  }, [allProducts, searchQuery]);
 
-  // 2. Skapa en unik lista med alla lag som finns i den aktuella ligan (för menyn)
+  const leagueProducts = useMemo(() => {
+    // Finns det ingen "liga" i URL:en?
+    // Avbryt direkt och skicka tillbaka hela listan med produkter!
+    if (!leagueName) {
+      return searchedProducts;
+    }
+
+    // Står det "favorites" i URL:en?
+    // Då filtrerar vi fram de tröjor som matchar användarens favoritlista.
+    if (leagueName.toLowerCase() === "favorites") {
+      return searchedProducts.filter((product) =>
+        favoriteProducts.some(
+          (fav) => fav._id === product._id || fav === product._id,
+        ),
+      );
+    }
+
+    // Om koden kommer hit MÅSTE det vara en vanlig liga (t.ex. serie-a).
+    // Då filtrerar vi på liganamnet som vanligt.
+    return searchedProducts.filter((product) => {
+      const dbSlug = product.league.toLowerCase().replace(/\s+/g, "-");
+      return dbSlug === leagueName.toLowerCase();
+    });
+  }, [searchedProducts, leagueName, favoriteProducts]);
+
+  // Skapa en unik lista med alla lag som finns i den aktuella ligan (för menyn)
   // Vi använder Set() för att ta bort dubbletter, och .filter(Boolean) för att undvika tomma värden
   const teamProducts = [
     ...new Set(leagueProducts.map((product) => product.team)),
   ].filter(Boolean);
 
-  // 3. Om ett LAG är valt i URL:en, filtrera listan en gång till, annars visa hela ligan
+  // Om ett LAG är valt i URL:en, filtrera listan en gång till, annars visa hela ligan
   const displayedProducts = teamName
     ? leagueProducts.filter((product) => {
         const dbTeamSlug = product.team.toLowerCase().replace(/\s+/g, "-");
@@ -156,11 +188,10 @@ export default function ProductsPage() {
             Antal Produkter: <strong>{displayedProducts.length}</strong>
           </div>
 
-          <div className="products-page__sort-container">
+          <div className="products-page__sort-container" ref={sortMenuRef}>
             <button
               className="products-page__filter-btn"
               onClick={() => setIsSortOpen((prev) => !prev)}
-              ref={sortMenuRef}
             >
               Sortering
               <ArrowUpDown size={18} />

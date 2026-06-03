@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext.jsx";
 import { useCart } from "../contexts/CartContext.jsx";
 import { ShoppingCart, User, House, Search, X, Menu } from "lucide-react";
@@ -9,6 +9,18 @@ export default function Navbar() {
   const { isAuth, logoutUser } = useAuth();
   const { cartCount } = useCart();
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    // Skicka sökterm till ProductsPage via URL-query
+    if(searchTerm.trim() !== "") {
+      navigate(`/products?search=${encodeURIComponent(searchTerm)}`);
+      setSearchTerm("");
+    }
+  };
 
   const closeMenu = () => setIsOpen(false);
 
@@ -87,14 +99,20 @@ export default function Navbar() {
           </button>
 
           {/* Sökfältet (Dolt på mobil) */}
-          <div className="navbar__search-desktop">
-            <Search size={18} className="navbar__search-icon" />
+          <form className="navbar__search-desktop" onSubmit={handleSearch}>
+            <button type="submit" className="navbar__search-icon-btn" aria-label="Sök">
+              <Search size={18} className="navbar__search-icon" />
+            </button>
+            {/* <Search size={18} className="navbar__search-icon" /> */}
             <input
               type="text"
               placeholder="Sök..."
               className="navbar__search-input"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+
             />
-          </div>
+          </form>
 
           {/* Profilikon */}
           <Link
