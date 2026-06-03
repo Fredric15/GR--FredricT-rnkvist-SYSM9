@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { getProducts } from "../api";
 import { useCart } from "../contexts/CartContext.jsx";
 import { Link, useParams } from "react-router-dom";
@@ -21,6 +21,23 @@ export default function ProductsPage() {
   const { leagueName, teamName } = useParams();
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [sortMethod, setSortMethod] = useState("default");
+
+  // Ref för sorteringsmenyn, används för att kunna stänga menyn med klick utanför
+  const sortMenuRef = useRef(null);
+
+  //useEffect för att stänga sorteringsmenyn när man klickar utanför
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (sortMenuRef.current && !sortMenuRef.current.contains(event.target)) {
+        setIsSortOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -143,6 +160,7 @@ export default function ProductsPage() {
             <button
               className="products-page__filter-btn"
               onClick={() => setIsSortOpen((prev) => !prev)}
+              ref={sortMenuRef}
             >
               Sortering
               <ArrowUpDown size={18} />

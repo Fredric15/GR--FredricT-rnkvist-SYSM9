@@ -37,9 +37,7 @@
 }
 
 .products-page__category-link--back {
-  background-color: var(
-    --color-bg-light
-  ); /* En liten avvikande färg för tillbaka-knappen */
+  background-color: var(--color-bg-light);
 }
 
 /* (Antal produkter & sortering) */
@@ -75,6 +73,47 @@
   transition: border-color 0.2s ease;
 }
 
+.products-page__sort-container {
+  position: relative;
+}
+
+.products-page__sort-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--color-white);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  margin-top: var(--spacing-xs);
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.products-page__sort-dropdown button {
+  background: none;
+  border: none;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  text-align: center;
+  font-size: var(--font-size-small);
+  color: var(--color-text);
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+  border-bottom: 2px solid var(--color-bg-light);
+}
+
+.products-page__sort-dropdown button:last-child {
+  border-bottom: none;
+}
+
+.products-page__sort-dropdown button.active {
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
 @media (min-width: 768px) {
   .products-page {
     padding: var(--spacing-lg) 0 var(--spacing-xl) 0; /* Mer padding på desktop */
@@ -89,5 +128,9 @@
   .products-page__filter-btn:hover {
     border-color: var(--color-primary);
     text-decoration: none;
+  }
+
+  .products-page__sort-dropdown button:hover {
+    background-color: var(--color-bg-light);
   }
 }
