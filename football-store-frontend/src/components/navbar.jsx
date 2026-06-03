@@ -8,21 +8,25 @@ import { ShoppingCart, User, House, Search, X, Menu } from "lucide-react";
 export default function Navbar() {
   const { isAuth, logoutUser } = useAuth();
   const { cartCount } = useCart();
-  const [isOpen, setIsOpen] = useState(false);
+
   const navigate = useNavigate();
+
   const [searchTerm, setSearchTerm] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
 
   const handleSearch = (e) => {
     e.preventDefault();
 
     // Skicka sökterm till ProductsPage via URL-query
-    if(searchTerm.trim() !== "") {
+    if (searchTerm.trim() !== "") {
       navigate(`/products?search=${encodeURIComponent(searchTerm)}`);
       setSearchTerm("");
+      setIsMobileSearchOpen(false);
     }
   };
 
-  const closeMenu = () => setIsOpen(false);
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <nav className="navbar">
@@ -33,7 +37,9 @@ export default function Navbar() {
         </Link>
 
         {/* MITTEN PÅ DESKTOP: Länkar */}
-        <ul className={`navbar__menu ${isOpen ? "navbar__menu--active" : ""}`}>
+        <ul
+          className={`navbar__menu ${isMenuOpen ? "navbar__menu--active" : ""}`}
+        >
           <li className="navbar__item">
             <Link to="/products" className="navbar__link" onClick={closeMenu}>
               Alla tröjor
@@ -94,13 +100,18 @@ export default function Navbar() {
           <button
             className="navbar__icon-btn navbar__search-mobile-btn"
             aria-label="Sök"
+            onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
           >
             <Search size={24} />
           </button>
 
           {/* Sökfältet (Dolt på mobil) */}
           <form className="navbar__search-desktop" onSubmit={handleSearch}>
-            <button type="submit" className="navbar__search-icon-btn" aria-label="Sök">
+            <button
+              type="submit"
+              className="navbar__search-icon-btn"
+              aria-label="Sök"
+            >
               <Search size={18} className="navbar__search-icon" />
             </button>
             {/* <Search size={18} className="navbar__search-icon" /> */}
@@ -110,7 +121,6 @@ export default function Navbar() {
               className="navbar__search-input"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-
             />
           </form>
 
@@ -141,13 +151,35 @@ export default function Navbar() {
           {/* Hamburger-meny (Döljs på desktop) */}
           <button
             className="navbar__toggle"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Open menu"
           >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </div>
+
+      {/* Sökfält för mobil (visas när isMobileSearchOpen är true) */}
+      {isMobileSearchOpen && (
+        <div className="navbar__search-mobile-dropdown">
+          <form className="navbar__mobile-search-form" onSubmit={handleSearch}>
+            <input
+              type="text"
+              placeholder="Sök..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              autoFocus
+            />
+            <button
+              type="submit"
+              className="navbar__mobile-search-submit"
+              aria-label="Sök"
+            >
+              <Search size={24} />
+            </button>
+          </form>
+        </div>
+      )}
     </nav>
   );
 }

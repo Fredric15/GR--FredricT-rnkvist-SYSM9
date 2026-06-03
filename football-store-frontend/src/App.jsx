@@ -53,7 +53,7 @@ function App() {
                 element={<OrderConfirmationPage />}
               />
               <Route path="/login" element={<AuthPage />} />
-              <Route path="/register" element={<AuthPage />} />
+
 
               <Route
                 path="/profile"
@@ -63,6 +63,7 @@ function App() {
                   </RequireAuth>
                 }
               />
+              <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </main>
 

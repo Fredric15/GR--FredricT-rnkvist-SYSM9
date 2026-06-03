@@ -48,13 +48,13 @@ export default function Home() {
         <div className="hero__content">
           <h1 className="hero__title">BÄR DIN PASSION</h1>
           <p className="hero__text">Hitta matchtröjan för ditt favoritlag</p>
-          <a
+          <button
             href="#popular-products"
             className="hero__btn"
             onClick={scrollToProducts}
           >
-            Shoppa nu
-          </a>
+            Populära produkter
+          </button>
         </div>
       </section>
 
@@ -83,11 +83,7 @@ export default function Home() {
 
         {/* Filtreringsraden / Kategorierna */}
         <div className="home__categories-row">
-          <Link
-            to="/products"
-            className="home__filter-link"
-            style={{ fontWeight: "bold" }}
-          >
+          <Link to="/products" className="home__filter-link">
             Alla produkter
           </Link>
           <Link to="/products/allsvenskan" className="home__filter-link">
