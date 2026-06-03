@@ -65,8 +65,6 @@ export default function AuthPage() {
           {isLoginMode ? "Välkommen tillbaka" : "Skapa ett konto"}
         </h1>
 
-        {error && <div className="auth-card__error">{error}</div>}
-
         <form onSubmit={handleSubmit} className="auth-form">
           {!isLoginMode && (
             <div className="form-group">
@@ -121,6 +119,7 @@ export default function AuthPage() {
               />
             </div>
           )}
+          {error && <div className="auth-card__error">{error}</div>}
 
           <button type="submit" className="auth-form__submit-btn">
             {isLoginMode ? "Logga in" : "Registrera dig"}

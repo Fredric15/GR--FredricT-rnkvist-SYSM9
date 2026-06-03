@@ -30,7 +30,7 @@
   padding: 10px;
   border-radius: 4px;
   font-size: 0.85rem;
-  margin-bottom: var(--spacing-md);
+
   text-align: center;
   font-weight: 600;
 }
@@ -75,7 +75,7 @@
   font-weight: 800;
   font-size: 1rem;
   cursor: pointer;
-  margin-top: 8px;
+  
   transition: transform 0.2s ease;
 }
 

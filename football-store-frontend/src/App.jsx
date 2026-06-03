@@ -16,6 +16,7 @@ import CartPage from "./pages/CartPage.jsx";
 import CheckoutPage from "./pages/CheckoutPage.jsx";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage.jsx";
 import { isAuthenticated } from "./api.js";
+import ScrollToTop from "./components/ScrollToTop.jsx";
 import "./App.css";
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
       <Router>
         <div className="app">
           <Navbar />
-
+          <ScrollToTop />
           <main className="app__main">
             <Routes>
               <Route path="/" element={<Home />} />
