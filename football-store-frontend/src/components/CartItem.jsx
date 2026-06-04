@@ -28,7 +28,7 @@ export default function CartItem({ item, updateQuantity, removeFromCart }) {
               <Plus size={16} />
             </button>
           </div>
-          <span className="cart-item__price">{item.price} SEK</span>
+          <span className="cart-item__price">{item.price} kr</span>
         </div>
       </div>
     </div>
