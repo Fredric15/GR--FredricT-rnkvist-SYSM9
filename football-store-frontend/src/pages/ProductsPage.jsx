@@ -26,10 +26,10 @@ export default function ProductsPage() {
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("search")?.toLowerCase() || "";
 
-  // Ref för sorteringsmenyn, används för att kunna stänga menyn med klick utanför
+  // Ref för sorteringsmenyn, används för att kunna stänga menyn med klick utanför menyn
   const sortMenuRef = useRef(null);
 
-  //useEffect för att stänga sorteringsmenyn när man klickar utanför
+  //useEffect för att stänga sorteringsmenyn med hjälp av useRef när man klickar utanför menyn
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (sortMenuRef.current && !sortMenuRef.current.contains(event.target)) {
@@ -58,8 +58,9 @@ export default function ProductsPage() {
     fetchProducts();
   }, []);
 
-  // Om det finns en sökterm i URL:en, filtrera produkterna baserat på namn, lag eller liga
+  //Om det finns en sökterm i URL:en, filtrera produkterna baserat på namn, lag eller liga
   //Använder useMemo för att undvika onödiga beräkningar vid varje sökning
+  //useMemo är en React-hook som sparar resultet i ett minne för prestandaoptimering
   const searchedProducts = useMemo(() => {
     if (!searchQuery) return allProducts;
 
@@ -70,6 +71,8 @@ export default function ProductsPage() {
         product.league.toLowerCase().includes(searchQuery)
       );
     });
+
+    //Den räknar bara om resultatet ifall dessa två variablerna ändras
   }, [allProducts, searchQuery]);
 
   const leagueProducts = useMemo(() => {

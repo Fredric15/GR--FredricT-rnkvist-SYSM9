@@ -17,6 +17,7 @@ import CheckoutPage from "./pages/CheckoutPage.jsx";
 import OrderConfirmationPage from "./pages/OrderConfirmationPage.jsx";
 import { isAuthenticated } from "./api.js";
 import ScrollToTop from "./components/ScrollToTop.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
 import "./App.css";
 
 function App() {
@@ -54,7 +55,6 @@ function App() {
               />
               <Route path="/login" element={<AuthPage />} />
 
-
               <Route
                 path="/profile"
                 element={
@@ -63,7 +63,7 @@ function App() {
                   </RequireAuth>
                 }
               />
-              <Route path="*" element={<Navigate to="/" />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </main>
 
