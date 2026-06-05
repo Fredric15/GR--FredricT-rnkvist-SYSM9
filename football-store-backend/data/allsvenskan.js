@@ -15,7 +15,7 @@ const allsvenskan = [
     description:
       "Stilren svart hemmatröja med gula inslag för spelet på Nationalarenan.",
     price: 899,
-    imageUrl: "/images/aik-home.jpeg",
+    imageUrl: "/images/aik-home.jpg",
   },
   {
     name: "Djurgårdens IF Hemmatröja 2026",
@@ -24,7 +24,7 @@ const allsvenskan = [
     description:
       "De klassiska ljus- och mörkblå ränderna från Stockholms stolthet.",
     price: 899,
-    imageUrl: "/images/dif-home.png",
+    imageUrl: "/images/dif-home.jpg",
   },
   {
     name: "Hammarby IF Hemmatröja 2026",
