@@ -56,7 +56,7 @@ Skapa filen `.env` och klistra in följande:
 ```
 PORT=5000
 CONNECTION_STRING=din_mongodb_connection_string_här
-JWT_SECRET=hitta_på_en_egen_hemlig_nyckel
+ACCESS_TOKEN_SECRET=hitta_på_en_egen_hemlig_nyckel
 ```
 
 ### 4. Seeda databasen
