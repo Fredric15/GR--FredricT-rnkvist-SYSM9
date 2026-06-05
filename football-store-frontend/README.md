@@ -23,47 +23,51 @@ För att kunna köra projektet behöver du ha följande installerat på din dato
 ### 1. Klona projektet
 
 Öppna din terminal och klona ner repot till din dator:
-\`\`\`bash
-git clone <https://github.com/Fredric15/GR--FredricT-rnkvist-SYSM9>
-cd <mappens-namn>
-\`\`\`
+
+```bash
+git clone https://github.com/Fredric15/GR--FredricT-rnkvist-SYSM9
+cd GR--FredricT-rnkvist-SYSM9
+```
 
 ### 2. Installera beroenden (Dependencies)
 
 Eftersom `node_modules` inte följer med koden måste du installera alla paket för både backend och frontend.
 
 **För Backend:**
-\`\`\`bash
+
+```bash
 cd football-store-backend
 npm install
-\`\`\`
+```
 
 **För Frontend:** (Öppna en ny terminal)
-\`\`\`bash
+
+```bash
 cd football-store-frontend
 npm install
-\`\`\`
+```
 
 ### 3. Sätt upp Miljövariabler (Environment Variables)
 
-För att koppla appen till en databas och hantera inloggning måste du skapa en `.env`-fil i din Backend.
+För att koppla appen till en databas och hantera inloggning måste du skapa en `.env`-fil i rooten av din Backend.
 
 Skapa filen `.env` och klistra in följande:
-\`\`\`env
+
+```
 PORT=5000
-MONGO*URI=din_mongodb_connection_string_här
+CONNECTION_STRING=din_mongodb_connection_string_här
 JWT_SECRET=hitta_på_en_egen_hemlig_nyckel
-\`\`\`
-*(Byt ut `din_mongodb_connection_string_här` mot din egen lokala länk eller Atlas-länk).\_
+```
 
 ### 4. Seeda databasen
 
-Innan du startar applikationen behöver du fylla databasen med fotbollströjor och en standardanvändare. Se till att du befinner dig i `backend`-mappen och kör detta kommando:
-\`\`\`bash
-node seeder.js
-\`\`\`
+Innan du startar applikationen behöver du fylla databasen med fotbollströjor och en standardanvändare. Öppna din backend-terminal och se till att du befinner dig i `backend`-mappen och kör detta kommando:
 
-En seedad user med dessa uppgifter:
+```bash
+node seeder.js
+```
+
+En seedad user med dessa uppgifter kommer att skapas i databasen:
 
 - **Email:** `user@test.com`
 - **Lösenord:** `000000`
@@ -73,17 +77,21 @@ En seedad user med dessa uppgifter:
 Nu är allt redo! Du behöver starta både servern och klienten samtidigt i två olika terminalfönster.
 
 **Starta Backend:**
-\`\`\`bash
+
+```bash
 cd football-store-backend
 npm run dev
-\`\`\`
+```
+
 _Servern bör nu köra på http://localhost:5000_
 
 **Starta Frontend:**
-\`\`\`bash
+
+```bash
 cd football-store-frontend
 npm run dev
-\`\`\`
+```
+
 _Klienten bör nu öppnas i din webbläsare (oftast på http://localhost:5173)_
 
 ## ✨ Funktioner
